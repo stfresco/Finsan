@@ -8,45 +8,72 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-users = User.create([
-  { name: 'Juan', last_name: 'Pérez', phone: '1234567890', date_birth: '1990-01-01' },
-  { name: 'Ana', last_name: 'García', phone: '0987654321', date_birth: '1985-05-15' }
-])
+puts "Goal"
+Milestone.destroy_all
+puts "Eliminando MilestoneTransaction"
+MilestoneTransaction.destroy_all
+puts "Eliminando Transaction"
+Goal.destroy_all
+puts "Eliminando milestone"
+MyTransaction.destroy_all
+puts "Eliminando Balance"
+Balance.destroy_all
+puts "Eliminando Account"
+Account.destroy_all
+puts "Eliminando Users"
+User.destroy_all
 
-users.each do |user|
-  Account.create([
-    { bank: 'BBVA', account_type: 'Checking', user_id: user.id, currency: 'USD' },
-    { bank: 'Santander', account_type: 'Savings', user_id: user.id, currency: 'EUR' }
-  ])
-end
+user1 = User.create!(
+  name: "Juan",
+  last_name: "Pérez",
+  email: "user@example.com",
+  password: "password123",
+  phone: "123456789",
+  date_birth: Date.new(1987, 6, 13)
+)
 
-accounts = Account.all
-accounts.each do |account|
-  Transaction.create([
-    { category: 'Food', amount: 50.0, date: '2024-11-01', method: 'Credit Card', description: 'Grocery shopping', account_id: account.id },
-    { category: 'Transport', amount: 20.0, date: '2024-11-05', method: 'Cash', description: 'Taxi ride', account_id: account.id }
-  ])
-end
+account1 = Account.create!(
+  bank: "Banco A",
+  account_type: "Checking",
+  user_id: user1.id,
+  currency: "USD"
+)
 
-users.each do |user|
-  goal = Goal.create(
-    title: 'Save for Vacation',
-    description: 'Saving money for a summer vacation',
-    status: 'Active',
-    start_date: '2024-01-01',
-    finish_date: '2024-06-30',
-    user_id: user.id
-  )
+Balance.create!(
+  account_id: account1.id,
+  total_amount: 1000,
+  status: "active"
+)
 
-  Milestone.create([
-    { goal_id: goal.id, amount: 200 },
-    { goal_id: goal.id, amount: 300 }
-  ])
-end
+# transaction1 = Transaction.create!(
+#   category: "Groceries",
+#   amount: 150,
+#   date: Date.today,
+#   method: "Credit Card",
+#   description: "Compra de alimentos",
+#   account_id: account1.id
+# )
 
-milestones = Milestone.all
-transactions = Transaction.all
+# transaction2 = Transaction.create!(
+#   category: "Rent",
+#   amount: 800,
+#   date: Date.today - 5,
+#   method: "Bank Transfer",
+#   description: "Pago de alquiler",
+#   account_id: account1.id
+# )
 
-milestones.each do |milestone|
-  MilestoneTransaction.create(milestones_id: milestone.id, transactions_id: transactions.sample.id)
-end
+goal1 = Goal.create!(
+  title: "Viaje a Europa",
+  description: "Ahorrar para un viaje de vacaciones",
+  status: "in_progress",
+  start_date: Date.today,
+  finish_date: Date.today + 6.months,
+  user_id: user1.id
+)
+
+# milestone1 = Milestone.create!(goal_id: goal1.id, amount: 500)
+
+# MilestoneTransaction.create!(milestone_id: milestone1.id, transactions_id: transaction1.id)
+# MilestoneTransaction.create!(milestone_id: milestone1.id, transactions_id: transaction2.id)
+>>>>>>> master

@@ -1,5 +1,5 @@
 class MilestoneTransaction < ApplicationRecord
   belongs_to :milestone
-  belongs_to :transactions
+  belongs_to :my_transaction
 
 end
