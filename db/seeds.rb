@@ -77,6 +77,11 @@ milestone1 = Milestone.create!(
   amount: 500
 )
 
+<<<<<<< HEAD
+# MilestoneTransaction.create!(milestone_id: milestone1.id, transactions_id: transaction1.id)
+# MilestoneTransaction.create!(milestone_id: milestone1.id, transactions_id: transaction2.id)
+>>>>>>> master
+=======
 MilestoneTransaction.create!(
   milestone_id: milestone1.id,
   my_transaction_id: mytransaction1.id
@@ -86,3 +91,4 @@ MilestoneTransaction.create!(
   milestone_id: milestone1.id,
   my_transaction_id: mytransaction2.id
 )
+>>>>>>> 6a35fad11ef593dd11cbf64a2a087595672bf35e
