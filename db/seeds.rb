@@ -8,13 +8,13 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-puts "Goal"
-Milestone.destroy_all
 puts "Eliminando MilestoneTransaction"
 MilestoneTransaction.destroy_all
-puts "Eliminando Transaction"
+puts "Milestone"
+Milestone.destroy_all
+puts "Eliminando goal"
 Goal.destroy_all
-puts "Eliminando milestone"
+puts "Eliminando Mytransaction"
 MyTransaction.destroy_all
 puts "Eliminando Balance"
 Balance.destroy_all
@@ -45,23 +45,23 @@ Balance.create!(
   status: "active"
 )
 
-# transaction1 = Transaction.create!(
-#   category: "Groceries",
-#   amount: 150,
-#   date: Date.today,
-#   method: "Credit Card",
-#   description: "Compra de alimentos",
-#   account_id: account1.id
-# )
+mytransaction1 = MyTransaction.create!(
+  category: "Groceries",
+  amount: 150,
+  date: Date.today,
+  method: "Credit Card",
+  description: "Compra de alimentos",
+  account_id: account1.id
+)
 
-# transaction2 = Transaction.create!(
-#   category: "Rent",
-#   amount: 800,
-#   date: Date.today - 5,
-#   method: "Bank Transfer",
-#   description: "Pago de alquiler",
-#   account_id: account1.id
-# )
+mytransaction2 = MyTransaction.create!(
+  category: "Rent",
+  amount: 800,
+  date: Date.today - 5,
+  method: "Bank Transfer",
+  description: "Pago de alquiler",
+  account_id: account1.id
+)
 
 goal1 = Goal.create!(
   title: "Viaje a Europa",
@@ -72,8 +72,23 @@ goal1 = Goal.create!(
   user_id: user1.id
 )
 
-# milestone1 = Milestone.create!(goal_id: goal1.id, amount: 500)
+milestone1 = Milestone.create!(
+  goal_id: goal1.id,
+  amount: 500
+)
 
+<<<<<<< HEAD
 # MilestoneTransaction.create!(milestone_id: milestone1.id, transactions_id: transaction1.id)
 # MilestoneTransaction.create!(milestone_id: milestone1.id, transactions_id: transaction2.id)
 >>>>>>> master
+=======
+MilestoneTransaction.create!(
+  milestone_id: milestone1.id,
+  my_transaction_id: mytransaction1.id
+)
+
+MilestoneTransaction.create!(
+  milestone_id: milestone1.id,
+  my_transaction_id: mytransaction2.id
+)
+>>>>>>> 6a35fad11ef593dd11cbf64a2a087595672bf35e
