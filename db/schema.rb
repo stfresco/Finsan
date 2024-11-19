@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_16_202336) do
+
+
+
+
+ActiveRecord::Schema[7.2].define(version: 2024_11_16_225819) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,11 +80,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_16_202336) do
 
   create_table "milestone_transactions", force: :cascade do |t|
     t.bigint "milestone_id", null: false
-    t.bigint "transactions_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "my_transaction_id", null: false
     t.index ["milestone_id"], name: "index_milestone_transactions_on_milestone_id"
-    t.index ["transactions_id"], name: "index_milestone_transactions_on_transactions_id"
+    t.index ["my_transaction_id"], name: "index_milestone_transactions_on_my_transaction_id"
   end
 
   create_table "milestones", force: :cascade do |t|
@@ -90,7 +95,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_16_202336) do
     t.index ["goal_id"], name: "index_milestones_on_goal_id"
   end
 
-  create_table "transactions", force: :cascade do |t|
+  create_table "my_transactions", force: :cascade do |t|
     t.string "category"
     t.decimal "amount"
     t.date "date"
@@ -99,7 +104,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_16_202336) do
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_transactions_on_account_id"
+    t.index ["account_id"], name: "index_my_transactions_on_account_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -124,7 +129,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_16_202336) do
   add_foreign_key "balances", "accounts"
   add_foreign_key "goals", "users"
   add_foreign_key "milestone_transactions", "milestones"
-  add_foreign_key "milestone_transactions", "transactions", column: "transactions_id"
+  add_foreign_key "milestone_transactions", "my_transactions"
   add_foreign_key "milestones", "goals"
-  add_foreign_key "transactions", "accounts"
+  add_foreign_key "my_transactions", "accounts"
 end

@@ -15,5 +15,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  get "accounts", to: "accounts#index"
+  resources :account, only: [:create, :index, :destroy]
 end
