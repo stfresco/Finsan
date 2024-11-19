@@ -8,19 +8,44 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+puts "Eliminando MilestoneTransaction"
+MilestoneTransaction.destroy_all
+puts "Milestone"
+Milestone.destroy_all
+puts "Eliminando goal"
+Goal.destroy_all
+puts "Eliminando Mytransaction"
+MyTransaction.destroy_all
+puts "Eliminando Balance"
+Balance.destroy_all
+puts "Eliminando Account"
+Account.destroy_all
+puts "Eliminando Users"
+User.destroy_all
+
 user1 = User.create!(
   name: "Juan",
   last_name: "Pérez",
   email: "user@example.com",
   password: "password123",
-  phone: "123456789"
+  phone: "123456789",
+  date_birth: Date.new(1987, 6, 13)
 )
 
-account1 = Account.create!(bank: "Banco A", account_type: "Checking", user_id: user1.id, currency: "USD")
+account1 = Account.create!(
+  bank: "Banco A",
+  account_type: "Checking",
+  user_id: user1.id,
+  currency: "USD"
+)
 
-Balance.create!(account_id: account1.id, total_amount: 1000, status: "active")
+Balance.create!(
+  account_id: account1.id,
+  total_amount: 1000,
+  status: "active"
+)
 
-transaction1 = Transaction.create!(
+mytransaction1 = MyTransaction.create!(
   category: "Groceries",
   amount: 150,
   date: Date.today,
@@ -29,7 +54,7 @@ transaction1 = Transaction.create!(
   account_id: account1.id
 )
 
-transaction2 = Transaction.create!(
+mytransaction2 = MyTransaction.create!(
   category: "Rent",
   amount: 800,
   date: Date.today - 5,
@@ -47,7 +72,23 @@ goal1 = Goal.create!(
   user_id: user1.id
 )
 
-milestone1 = Milestone.create!(goal_id: goal1.id, amount: 500)
+milestone1 = Milestone.create!(
+  goal_id: goal1.id,
+  amount: 500
+)
 
-MilestoneTransaction.create!(milestones_id: milestone1.id, transactions_id: transaction1.id)
-MilestoneTransaction.create!(milestones_id: milestone1.id, transactions_id: transaction2.id)
+<<<<<<< HEAD
+# MilestoneTransaction.create!(milestone_id: milestone1.id, transactions_id: transaction1.id)
+# MilestoneTransaction.create!(milestone_id: milestone1.id, transactions_id: transaction2.id)
+>>>>>>> master
+=======
+MilestoneTransaction.create!(
+  milestone_id: milestone1.id,
+  my_transaction_id: mytransaction1.id
+)
+
+MilestoneTransaction.create!(
+  milestone_id: milestone1.id,
+  my_transaction_id: mytransaction2.id
+)
+>>>>>>> 6a35fad11ef593dd11cbf64a2a087595672bf35e

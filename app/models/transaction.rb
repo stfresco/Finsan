@@ -4,5 +4,6 @@ class Transaction < ApplicationRecord
 
   validates :amount, presence: true,
   validates :date, presence: true,
+
   validates :method, presence: true
 end
