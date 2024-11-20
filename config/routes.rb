@@ -12,12 +12,13 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   resources :my_transactions, only: [:index,  :show]
-  resources :goals
+
   # Defines the root path route ("/")
   # root "posts#index"
 
   resources :accounts do
     resources :my_transactions, only: [:new, :create]
+    resources :goals
   end
 
   resources :balances, only:[:edit, :update, :show]

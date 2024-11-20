@@ -8,9 +8,11 @@ class GoalsController < ApplicationController
   end
 
   def create
+    @account = Account.find(params[:account_id])
     @goal = Goal.new(goal_params)
+    @goal.account = @account
     if @goal.save
-      redirect_to goals_path(@goal), notice: "You have register a new goal"
+      redirect_to goals_path(@goal), notice: "You have registered a new goal"
     else
       render :new, alert: "We had a problem procesing your goal"
     end
