@@ -1,0 +1,12 @@
+<%= form_with model: balance do |f| %>
+  <%= f.label :account_id %>
+  <%= f.number_field :account_id %>
+
+  <%= f.label :total_amount %>
+  <%= f.text_field :total_amount %>
+
+  <%= f.label :status %>
+  <%= f.text_field :status %>
+
+  <%= f.submit %>
+<% end %>

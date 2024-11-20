@@ -2,3 +2,7 @@
 <p><%= @account.account_type %></p>
 <p><%= @account.user_id %></p>
 <p><%= @account.currency %></p>
+<%= link_to "Delete",
+  account_path(@account),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+%>
