@@ -1,0 +1,6 @@
+<ul>
+  <% @balances.each do |balance| %>
+    <li><%= link_to balance.account_id,
+    balance_path(balance) %></li>
+  <% end %>
+</ul>

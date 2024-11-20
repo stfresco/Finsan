@@ -1,0 +1,7 @@
+<h2><%= @balance.account_id %></h2>
+<p><%= @balance.total_amount %></p>
+<p><%= @balance.status %></p>
+<%= link_to "Delete",
+  balance_path(@balance),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+%>
