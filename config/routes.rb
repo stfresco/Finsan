@@ -11,10 +11,13 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  resources :my_transactions, only: [:index, :new, :create, :show]
+  resources :my_transactions, only: [:index,  :show]
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :accounts
+  resources :accounts do
+    resources :my_transactions, only: [:new, :create]
+  end
+
   resources :balances, only:[:edit, :update, :show]
 end
