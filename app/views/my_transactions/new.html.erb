@@ -1,8 +1,8 @@
-<%= simple_form_for(@transaction) do |c| %>
+<%= simple_form_for [@account, @transaction] do |c| %>
     <%= c.input :category%>
     <%= c.input :amount%>
     <%= c.input :method%>
     <%= c.input :description%>
     <%= c.input :date%>
-     <%=c.submit %>
-     <% end %>
+    <%=c.submit %>
+<% end %>

@@ -5,4 +5,8 @@ class MyTransaction < ApplicationRecord
   validates :amount, presence: true
   validates :date, presence: true
   validates :method, presence: true
+
+  def check_balance
+    if 
+  end
 end
