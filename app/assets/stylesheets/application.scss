@@ -24,3 +24,33 @@
 .table-hover tbody tr:hover {
   background-color: #f8f9fa;
 }
+
+
+/////////////////////////
+.container {
+  max-width: 800px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #4caf50;
+  border-color: #4caf50;
+}
+
+.btn-outline-primary {
+  color: #4caf50;
+  border-color: #4caf50;
+  &:hover {
+    background-color: #4caf50;
+    color: white;
+  }
+}
+
+img {
+  max-height: 300px;
+  object-fit: cover;
+}
