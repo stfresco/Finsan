@@ -11,12 +11,21 @@ class AccountsController < ApplicationController
     @account = Account.new
   end
 
+  # def create
+  #   @account = Account.new(account_params)
+  #   @account.user = current_user
+  #   if @account.save
+  #     # @account.balance = Balance.create(total_amount: 0, status: true)
+  #     @account.balance = Balance.create(account: @account, total_amount: 0, status: true)
+  #     redirect_to account_path(@account)
+  #   else
+  #     render :new
+  #   end
+  # end
   def create
     @account = Account.new(account_params)
     @account.user = current_user
     if @account.save
-      @account.balance = Balance.create(total_amount: 0, status: true)
-
       redirect_to account_path(@account)
     else
       render :new
@@ -47,5 +56,8 @@ class AccountsController < ApplicationController
 
   def set_account
     @account = Account.find(params[:id])
+    # if @account.nil?
+    #   redirect_to account_path, alert: "acount no encontrado"
+    # end
   end
 end

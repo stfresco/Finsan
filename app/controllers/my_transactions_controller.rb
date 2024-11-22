@@ -1,5 +1,4 @@
 class MyTransactionsController < ApplicationController
-  
   def index
     @transactions = MyTransaction.all
   end
@@ -27,6 +26,6 @@ class MyTransactionsController < ApplicationController
   private
 
   def transaction_params
-    params.require(:my_transaction).permit(:category, :amount, :date, :method, :description)
+    params.require(:my_transaction).permit(:category, :amount, :date, :method, :description, :mytransaction_type)
   end
 end
