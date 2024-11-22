@@ -18,8 +18,8 @@ Rails.application.routes.draw do
 
   resources :accounts do
     resources :my_transactions, only: [:new, :create]
+    resource :balance, only: [:edit, :update, :show]
     resources :goals
   end
 
-  resources :balances, only:[:edit, :update, :show]
 end

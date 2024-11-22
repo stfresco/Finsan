@@ -4,5 +4,6 @@
     <%= c.input :method%>
     <%= c.input :description%>
     <%= c.input :date%>
+    <%= c.input :mytransaction_type, as: :select, collection: ["ingreso","egreso"], include_blank:"Seleciona una opción" %>
     <%=c.submit %>
 <% end %>

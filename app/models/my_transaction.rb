@@ -6,7 +6,14 @@ class MyTransaction < ApplicationRecord
   validates :date, presence: true
   validates :method, presence: true
 
+  after_create :check_balance
+
   def check_balance
-    if 
+    balance = account.balance
+    if mytransaction_type == "ingreso"
+      balance.update(total_amount: balance.total_amount + amount)
+    elsif mytransaction_type == "egreso"
+      balance.update(total_amount: balance.total_amount - amount)
+    end
   end
 end
