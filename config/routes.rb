@@ -30,9 +30,9 @@ Rails.application.routes.draw do
 
     resources :my_transactions, only: [:index, :edit, :new, :create]
     resource :balance, only: [:edit, :update, :show]
-   
+
   end
 
 
 
-end
+
