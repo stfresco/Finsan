@@ -1,8 +1,8 @@
-<%= simple_form_for[@account,@goal] do |c| %>
+<%= simple_form_for @goal do |c| %>
     <%= c.input :title%>
     <%= c.input :description%>
     <%= c.input :status%>
     <%= c.input :start_date%>
     <%= c.input :finish_date%>
      <%=c.submit %>
-     <% end %>
+ <% end %>

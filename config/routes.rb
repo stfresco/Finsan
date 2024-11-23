@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "pages#home"
+  root to: "home#index"
+
+   get 'home/index', to: 'home#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -19,9 +21,9 @@ Rails.application.routes.draw do
 
   resources :accounts do
     resources :my_transactions, only: [:index, :edit, :update, :new, :create, :show, :destroy]
-    resource :balance, only: [:edit, :update, :show]
+    resources :balances, only:[:edit, :update, :show]
     resources :goals
   end
-
+  
    get 'all_transactions', to: 'my_transactions#all_transactions'
 end

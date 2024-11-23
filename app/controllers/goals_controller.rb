@@ -5,16 +5,16 @@ class GoalsController < ApplicationController
 
   def new
     @goal = Goal.new
+
   end
 
   def create
-    @account = Account.find(params[:account_id])
     @goal = Goal.new(goal_params)
-    @goal.account = @account
+    @goal.user = current_user
     if @goal.save
       redirect_to goals_path(@goal), notice: "You have registered a new goal"
     else
-      render :new, alert: "We had a problem procesing your goal"
+      render :new, status: :unprocessable_entity, alert: "We had a problem processing your goal"
     end
   end
 
