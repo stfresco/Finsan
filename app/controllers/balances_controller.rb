@@ -1,4 +1,5 @@
 class BalancesController < ApplicationController
+  before_action :set_account, only: [:show]
   before_action :set_balance, only: [:show, :edit, :update, :destroy]
   def index
     @balances = Balance.all
@@ -42,7 +43,14 @@ class BalancesController < ApplicationController
     params.require(:balance).permit(:account_id, :total_amount, :status)
   end
 
+  def set_account
+    @account = Account.find_by(id: params[:account_id])
+    redirect_to accounts_path, alert: "Cuenta no encontrada" unless @account
+  end
+
   def set_balance
-    @balance = Balance.find(params[:id])
+    return unless @account
+    @balance = @account.balance
+    redirect_to account_path(@account), alert: "el balance no existe" unless @balance
   end
 end

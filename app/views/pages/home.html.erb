@@ -1,82 +1,35 @@
-<h1>FINSAN</h1>
-
-
 <div class="container mt-5">
+  <!-- Encabezado de bienvenida -->
   <div class="text-center mb-4">
-    <h1 class="display-4">Bienvenido a tu Dashboard Financiero</h1>
-    <p class="lead">Gestiona tus cuentas, transacciones y objetivos financieros fácilmente.</p>
+    <h1 class="display-4">¡Bienvenido a Finsan!</h1>
+    <p class="lead">Lleva un control completo de tus finanzas de forma sencilla.</p>
   </div>
 
-  <div class="row">
-    <div class="col-md-4">
-      <div class="card text-center">
-        <div class="card-body">
-          <h5 class="card-title">Total en Cuentas</h5>
-          <h3 class="text-success">$0</h3>
-          <button class="btn btn-primary btn-sm">Ver cuentas</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card text-center">
-        <div class="card-body">
-          <h5 class="card-title">Transacciones Recientes</h5>
-          <h3 class="text-info">0</h3>
-          <button class="btn btn-primary btn-sm">Ver transacciones</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card text-center">
-        <div class="card-body">
-          <h5 class="card-title">Objetivos Activos</h5>
-          <h3 class="text-warning"> Aun no tienes objetivos creados</h3>
-          <button class="btn btn-primary btn-sm">Ver objetivos</button>
-        </div>
-      </div>
-    </div>
+  <!-- Mensaje introductorio -->
+  <div class="text-center mb-5">
+    <p class="mb-3">Comienza a gestionar tus finanzas hoy mismo.</p>
+    <p class="font-weight-light">Inicia sesión o crea una cuenta para comenzar.</p>
   </div>
 
-  <div class="row mt-5">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Resumen Financiero</h5>
-          <canvas id="financialChart" style="width:100%; height:400px;"></canvas>
-        </div>
-      </div>
-    </div>
+  <!-- Botones de acción -->
+  <div class="d-flex justify-content-center">
+    <a href="/users/sign_in" class="btn btn-primary btn-lg mx-3">Iniciar Sesión</a>
+    <a href="/users/sign_up" class="btn btn-outline-primary btn-lg mx-3">Crear Cuenta</a>
   </div>
 
-  <div class="row mt-5">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Transacciones Recientes</h5>
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>Fecha</th>
-                <th>Categoría</th>
-                <th>Método</th>
-                <th>Monto</th>
-                <th>Descripción</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>2024-11-10</td>
-                <td>Compra</td>
-                <td>Tarjeta de Crédito</td>
-                <td>$150.00</td>
-                <td>Compra de alimentos</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+  <!-- Imagen de apoyo o ilustrativa -->
+  <div class="mt-5 text-center">
+    <img src="https://kalmy.mx/wp-content/uploads/2022/03/conferencia-finanzas-paraninfo-sgo-medium-size.jpg"
+         alt="Gestión financiera simplificada" class="img-fluid rounded shadow" style="width: 600px; height: auto;">
+  </div>
+
+  <!-- Pequeña nota o beneficios -->
+  <div class="text-center mt-5">
+    <p class="text-muted">¿Por qué elegir Finsan?</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><i class="fas fa-check-circle"></i> Control completo de tus gastos</li>
+      <li class="list-inline-item"><i class="fas fa-check-circle"></i> Acceso a gráficos y análisis financieros</li>
+      <li class="list-inline-item"><i class="fas fa-check-circle"></i> Seguridad y privacidad garantizadas</li>
+    </ul>
   </div>
 </div>
