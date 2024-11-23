@@ -1,5 +1,10 @@
 class MyTransactionsController < ApplicationController
   def index
+    @account = Account.find(params[:account_id])
+    @transactions = @account.my_transactions
+  end
+
+  def all_transactions
     @transactions = MyTransaction.all
   end
 
@@ -13,6 +18,10 @@ class MyTransactionsController < ApplicationController
     @transaction = MyTransaction.new(transaction_params)
     @transaction.account = @account
     if @transaction.save
+      @balance = Balance.find_by(account_id: @account.id)
+      @balance.total_amount -= @transaction.amount if @transaction.mytransaction_type == "egreso"
+      @balance.total_amount += @transaction.amount if @transaction.mytransaction_type == "ingreso"
+      @balance.save
       redirect_to my_transaction_path(@transaction), notice: "You have made a new transaction!"
     else
       render :new, alert: "There was a problem processing your transaction🙁"

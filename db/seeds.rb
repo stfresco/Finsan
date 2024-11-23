@@ -7,6 +7,8 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+# Reseteamos las secuencias a 1
+
 
 puts "Eliminando MilestoneTransaction"
 MilestoneTransaction.destroy_all
@@ -22,6 +24,10 @@ puts "Eliminando Account"
 Account.destroy_all
 puts "Eliminando Users"
 User.destroy_all
+
+ActiveRecord::Base.connection.tables.each do |table|
+  ActiveRecord::Base.connection.reset_pk_sequence!(table)
+end
 
 user1 = User.create!(
   name: "Juan",
