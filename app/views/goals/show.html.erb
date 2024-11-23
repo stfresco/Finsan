@@ -4,3 +4,4 @@
 <%= @goal.status %>
 <%= @goal.start_date %>
 <%= @goal.finish_date %>
+ <%= link_to "Delete", goal_path(@goal), class: "btn btn-danger btn-sm", data: {turbo_method: :delete}  %>
