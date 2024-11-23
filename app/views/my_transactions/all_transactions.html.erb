@@ -1,4 +1,4 @@
-<h1>Transaciones de la cuenta del banco: <%= @account.bank %></h1>
+<h1>Todas mis transacciones</h1>
 <div class="content-with-navbar-spacing">
     <table class="table table-striped">
      <thead>
@@ -6,6 +6,7 @@
          <th scope="col">Categoria</th>
          <th scope="col">Monto</th>
          <th scope="col">Fecha</th>
+         <th scope="col">Cuenta del banco</th>
          <th scope="col">Tipo-Transación</th>
          <th scope="col">Acciones</th>
        </tr>
@@ -16,6 +17,7 @@
          <td><%= t.category %></td>
          <td><%= t.amount %></td>
          <td><%= t.date %></td>
+         <td><%= t.account.bank %></td>
          <td><%= t.mytransaction_type %></td>
          <td><%= link_to "Editar", edit_account_my_transaction_path(account_id: t.account_id, id: t.id), class: "btn btn-secondary btn-sm" %> | <%= link_to "Delete", my_transaction_path(t), class: "btn btn-danger btn-sm", data: {turbo_method: :delete} %></td>
        </tr>

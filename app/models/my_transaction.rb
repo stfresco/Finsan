@@ -11,9 +11,13 @@ class MyTransaction < ApplicationRecord
   def check_balance
     balance = account.balance
     if mytransaction_type == "ingreso"
-      balance.update(total_amount: balance.total_amount + amount)
-    elsif mytransaction_type == "egreso"
-      balance.update(total_amount: balance.total_amount - amount)
+      if balance.total_amount >= self.amount
+        balance.update(total_amount: balance.total_amount + amount)
+      end
+    else
+      if balance.total_amount >= self.amount
+        balance.update(total_amount: balance.total_amount - amount)
+      end
     end
   end
 end
