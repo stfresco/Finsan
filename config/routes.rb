@@ -13,15 +13,15 @@ Rails.application.routes.draw do
 
   resources :my_transactions, only: [:edit, :index,  :show]
 
-  get 'all_transactions', to: 'my_transactions#all_transactions'
+
   # Defines the root path route ("/")
   # root "posts#index"
 
   resources :accounts do
-    resources :my_transactions, only: [:index, :edit, :new, :create]
+    resources :my_transactions, only: [:index, :edit, :update, :new, :create, :show, :destroy]
     resource :balance, only: [:edit, :update, :show]
     resources :goals
   end
 
-
+   get 'all_transactions', to: 'my_transactions#all_transactions'
 end

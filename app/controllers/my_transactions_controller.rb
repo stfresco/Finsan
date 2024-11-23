@@ -5,7 +5,7 @@ class MyTransactionsController < ApplicationController
   end
 
   def all_transactions
-    @transactions = MyTransaction.all
+    @transactions = MyTransaction.all.includes(:account)
   end
 
   def new
@@ -26,6 +26,33 @@ class MyTransactionsController < ApplicationController
 
   def show
     @transaction = MyTransaction.find(params[:id])
+  end
+
+  def edit
+    @account = Account.find(params[:account_id])
+    @transaction = @account.my_transactions.find(params[:id])
+  end
+
+  def update
+    @account = Account.find(params[:account_id])
+    @transaction = @account.my_transactions.find(params[:id])
+
+    if @transaction.update(transaction_params)
+      redirect_to my_transaction_path(@transaction)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @transaction = MyTransaction.find(params[:id])
+    @account = Account.find(params[:account_id])
+
+    if @transaction.destroy
+      redirect_to account_my_transactions_path(@account), notice: 'Transaction was successfully deleted.', status: :see_other
+    else
+      redirect_to account_my_transactions_path(@account), alert: 'Failed to delete transaction.'
+    end
   end
 
   private
