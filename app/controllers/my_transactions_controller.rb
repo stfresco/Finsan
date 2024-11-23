@@ -1,6 +1,10 @@
 class MyTransactionsController < ApplicationController
-  
   def index
+    @account = Account.find(params[:account_id])
+    @transactions = @account.my_transactions
+  end
+
+  def all_transactions
     @transactions = MyTransaction.all
   end
 
@@ -27,6 +31,6 @@ class MyTransactionsController < ApplicationController
   private
 
   def transaction_params
-    params.require(:my_transaction).permit(:category, :amount, :date, :method, :description)
+    params.require(:my_transaction).permit(:category, :amount, :date, :method, :description, :mytransaction_type)
   end
 end
