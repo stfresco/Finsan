@@ -18,10 +18,19 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :accounts do
+
+    resources :my_transactions, only: [:new, :create]
+
+  end
+
+  resources :balances, only:[:edit, :update, :show]
+  resources :goals
+
     resources :my_transactions, only: [:index, :edit, :new, :create]
     resource :balance, only: [:edit, :update, :show]
-    resources :goals
+   
   end
+
 
 
 end
