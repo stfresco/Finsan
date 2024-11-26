@@ -17,7 +17,7 @@
          <td><%= t.amount %></td>
          <td><%= t.date %></td>
          <td><%= t.mytransaction_type %></td>
-         <td><%= link_to "Editar", edit_account_my_transaction_path(account_id: t.account_id, id: t.id), class: "btn btn-secondary btn-sm" %> | <%= link_to "Delete", my_transaction_path(t), class: "btn btn-danger btn-sm", data: {turbo_method: :delete} %></td>
+         <td><%= link_to "Editar", edit_account_my_transaction_path(account_id: t.account_id, id: t.id), class: "btn btn-secondary btn-sm" %> | <%= link_to(t) my_transaction_path(t), class: "btn btn-danger btn-sm", data: {turbo_method: :delete} %></td>
        </tr>
      <% end %>
     </tbody>

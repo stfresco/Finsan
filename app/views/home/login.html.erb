@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <div class="text-center mb-4">
+    <h1 class="display-4">Bienvenido, <%= @user.name || @user.email %></h1>
+    <p class="lead">Aquí está un resumen de tu información.</p>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Tus Cuentas</h5>
+          <ul>
+            <% @accounts.each do |account| %>
+              <li><%= account.name %>: $<%= account.balance %></li>
+            <% end %>
+          </ul>
+          <a href="<%= accounts_path %>" class="btn btn-primary btn-sm">Gestionar Cuentas</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Tus Objetivos</h5>
+          <ul>
+            <% @goals.each do |goal| %>
+              <li><%= goal.name %>: $<%= goal.target_amount %> (Progreso: $<%= goal.progress %>)</li>
+            <% end %>
+          </ul>
+          <a href="<%= goals_path %>" class="btn btn-primary btn-sm">Gestionar Objetivos</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="<%= dashboard_path %>" class="btn btn-success btn-lg">Ir al Dashboard</a>
+  </div>
+</div>

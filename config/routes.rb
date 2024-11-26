@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "home#index"
+  root to: "pages#home"
 
-   get 'home/index', to: 'home#index'
+  get 'login', to: 'home#login', as: :login
+  get 'dashboard', to: 'home#index', as: :dashboard
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -13,26 +14,13 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  resources :my_transactions, only: [:edit, :index,  :show]
-
+  resources :my_transactions, only: [:edit, :index, :show]
   get 'all_transactions', to: 'my_transactions#all_transactions'
-  # Defines the root path route ("/")
-  # root "posts#index"
 
   resources :accounts do
-
     resources :my_transactions, only: [:new, :create]
-
   end
 
-  resources :balances, only:[:edit, :update, :show]
+  resources :balances, only: [:edit, :update, :show]
   resources :goals
-
-    resources :my_transactions, only: [:index, :edit, :new, :create]
-    resource :balance, only: [:edit, :update, :show]
-   
-  end
-
-
-
 end
