@@ -1,5 +1,6 @@
 class Goal < ApplicationRecord
   belongs_to :user
+  has_many :milestones, dependent: :destroy
 
   validates :title, presence: true
   validates :status, presence: true
