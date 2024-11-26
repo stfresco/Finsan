@@ -11,7 +11,7 @@ class GoalsController < ApplicationController
   def create
     @goal = Goal.new(goal_params)
     @goal.user = current_user
-    if @goal.save!
+    if @goal.save
       redirect_to goals_path(@goal), notice: "You have registered a new goal"
     else
       render :new, status: :unprocessable_entity, alert: "We had a problem processing your goal"
