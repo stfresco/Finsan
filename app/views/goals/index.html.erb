@@ -1,3 +1,22 @@
-<%@goals.each do |g|%>
-<%=g.title %>
-<%end %>
+
+   <div class="text-center mb-4">
+     <h1 class="display-4">Tus objetivos! 😎</h1>
+     <p class="lead"></p>
+   </div>
+   <div class="row">
+    <%@goals.each do |g|%>
+
+       <div class="col-md-2 ">
+      <div class="card text-center">
+        <div class="card-body m-2">
+          <h5 class="card-title"><%=g.title%></h5>
+          <h3 class="text-success"></h3>
+          <%= link_to "Detalles!", goal_path(g), class: "btn btn-primary btn-sm"  %>
+          <%= link_to "Editar objetivo", edit_goal_path(g), class: "btn btn-secondary btn-sm"  %>
+           <%= link_to "Eliminar objetivo", goal_path(g), class: "btn btn-warning btn-sm", data: {turbo_method: :delete}  %>
+        </div>
+      </div>
+    </div>
+    <%end%>
+
+  </div>
