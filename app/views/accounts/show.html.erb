@@ -2,7 +2,11 @@
 <p><%= @account.account_type %></p>
 <p><%= @account.user_id %></p>
 <p><%= @account.currency %></p>
+<<<<<<< HEAD
 <p><%#= @current.total.amount %></p>
+=======
+<p><%= @account.balance.total_amount %></p>
+>>>>>>> master
 <%= link_to "Delete",
   account_path(@account), class: "btn btn-danger btn-sm",
   data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
