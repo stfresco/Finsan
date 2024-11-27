@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get 'all_transactions', to: 'my_transactions#all_transactions'
 
   resources :accounts do
-    resources :my_transactions, only: [:new, :create]
+    resources :my_transactions, only: [ :index, :new, :create]
   end
 
   resources :balances, only: [:edit, :update, :show]
