@@ -10,6 +10,6 @@ class HomeController < ApplicationController
   def login
     @user = current_user
     @accounts = current_user.accounts
-    @goals = current_user.goals
+    #@goals = current_user.goals
   end
 end

@@ -9,11 +9,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tus Cuentas</h5>
-          <ul>
-            <% @accounts.each do |account| %>
-              <li><%= account.name %>: $<%= account.balance %></li>
-            <% end %>
-          </ul>
+
           <a href="<%= accounts_path %>" class="btn btn-primary btn-sm">Gestionar Cuentas</a>
         </div>
       </div>
@@ -22,12 +18,19 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
+          <h5 class="card-title">Tus transacciones</h5>
+
+          <a href="<%= goals_path %>" class="btn btn-primary btn-sm">Gestiona tus transacciones</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
           <h5 class="card-title">Tus Objetivos</h5>
-          <ul>
-            <% @goals.each do |goal| %>
-              <li><%= goal.name %>: $<%= goal.target_amount %> (Progreso: $<%= goal.progress %>)</li>
-            <% end %>
-          </ul>
+
           <a href="<%= goals_path %>" class="btn btn-primary btn-sm">Gestionar Objetivos</a>
         </div>
       </div>
