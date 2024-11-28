@@ -3,8 +3,9 @@
     <%= c.input :amount%>
     <%= c.input :method%>
     <%= c.input :description%>
-    <%= c.input :date%>
-    <%= c.input :mytransaction_type, as: :select, collection: ["ingreso","egreso"], include_blank:"Seleciona una opción" %>
+    <%= c.input :date, as: :string,
+            input_html: { data: { controller: "datepicker" } }%>
+    <%=c.submit data: {check_balance_target: "submit"}%>
+    <%= c.input :mytransaction_type, as: :select, collection: ["Ingreso","Egreso"], include_blank:"Seleciona una opción" %>
     <%=c.submit %>
 <% end %>
-

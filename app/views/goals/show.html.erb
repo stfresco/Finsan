@@ -1,7 +1,7 @@
 <h1>My goal</h1>
-<%= @goal.title %>
-<%= @goal.description %>
-<%= @goal.status %>
-<%= @goal.start_date %>
-<%= @goal.finish_date %>
+<p><Strong>Titulo de meta: </Strong><%= @goal.title %></p>
+<p><Strong>Descripción: </Strong><%= @goal.description %></p>
+<p><strong>Estado: </strong><%= @goal.status %></p>
+<p><strong>Fecha de Inicio: </strong><%= @goal.start_date %></p>
+<p><strong>Fecha de termino: </strong><%= @goal.finish_date %></p>
  <%= link_to "Delete", goal_path(@goal), class: "btn btn-danger btn-sm", data: {turbo_method: :delete}  %>

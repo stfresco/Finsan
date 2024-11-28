@@ -9,7 +9,7 @@ export default class extends Controller {
   }
 
   disableEgreso() {
-    if (this.selectTarget.value === "egreso" && parseFloat(this.balanceTarget.innerText) === 0.0) {
+    if (this.selectTarget.value === "Egreso" && parseFloat(this.balanceTarget.innerText) === 0.0) {
       this.submitTarget.disabled = true
       this.amountTarget.style.color = 'red'
       alert("Tu saldo es insuficiente para un egreso")
@@ -20,7 +20,7 @@ export default class extends Controller {
   }
 
   saldo() {
-    if (parseFloat(this.amountTarget.value) > parseFloat(this.balanceTarget.innerText) && this.selectTarget.value === 'egreso') {
+    if (parseFloat(this.amountTarget.value) > parseFloat(this.balanceTarget.innerText) && this.selectTarget.value === 'Egreso') {
       this.amountTarget.style.color = 'red'
       this.submitTarget.disabled = true
       alert("Tu saldo es insuficiente para un egreso")
