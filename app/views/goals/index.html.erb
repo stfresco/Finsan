@@ -3,6 +3,7 @@
      <h1 class="display-4">Tus objetivos! 😎</h1>
      <p class="lead"></p>
    </div>
+<%= link_to content_tag(:i, "", class: "fa-solid fa-arrow-left"), login_path(@account), class: "btn btn-primary btn-sm" %>
    <div class="row">
     <%@goals.each do |g|%>
 
