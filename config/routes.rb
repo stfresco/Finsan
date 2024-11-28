@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
 
-  get 'login', to: 'home#login', as: :login
-  get 'dashboard', to: 'home#index', as: :dashboard
+  get 'dashboard', to: 'dashboard#index', as: :dashboard
+  get '/home', to: 'home#index', as: 'home'
+  get '/login', to: 'home#login', as: 'login'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

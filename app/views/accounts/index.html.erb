@@ -3,4 +3,8 @@
     <li><%= link_to account.bank,
     account_path(account) %></li>
   <% end %>
+
+  <%= link_to content_tag(:i, "", class: "fa-solid fa-arrow-left"), login_path(@account), class: "btn btn-primary btn-sm" %> |
+  <%= link_to "Agregar una cuenta", new_account_path(@account), class: "btn btn-primary btn-sm" %>
+
 </ul>
