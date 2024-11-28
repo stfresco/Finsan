@@ -1,10 +1,22 @@
-<ul>
-  <% @accounts.each do |account| %>
-    <li><%= link_to account.bank,
-    account_path(account) %></li>
-  <% end %>
+<div class="text-center mb-4">
+  <h1 class="display-4">Tus Cuentas! 😎</h1>
+  <p class="lead"></p>
+</div>
+  <div class="row">
+  <%@accounts.each do |account|%>
+    <div class="col-md-2 ">
+      <div class="card text-center">
+        <div class="card-body m-2">
+          <h5 class="card-title"><%=account.bank%></h5>
+          <h3 class="text-success"></h3>
+          <%= link_to "Detalles!", account_path(account), class: "btn btn-primary btn-sm"  %>
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>
 
-  <%= link_to content_tag(:i, "", class: "fa-solid fa-arrow-left"), login_path(@account), class: "btn btn-primary btn-sm" %> |
-  <%= link_to "Agregar una cuenta", new_account_path(@account), class: "btn btn-primary btn-sm" %>
+<%= link_to content_tag(:i, "", class: "fa-solid fa-arrow-left"), login_path(@account), class: "btn btn-primary btn-sm" %> |
+<%= link_to "Agregar una cuenta", new_account_path(@account), class: "btn btn-primary btn-sm" %>
 
-</ul>
+

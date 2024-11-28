@@ -14,10 +14,11 @@
           <h3 class="text-success"></h3>
           <%= link_to "Detalles!", goal_path(g), class: "btn btn-primary btn-sm"  %>
           <%= link_to "Editar objetivo", edit_goal_path(g), class: "btn btn-secondary btn-sm"  %>
-
         </div>
       </div>
     </div>
     <%end%>
-
   </div>
+
+<a href="<%= new_goal_path %>" class="btn btn-orange btn-sm">Agregar una Meta</a>
+<a href="<%= login_path %>" class="btn btn-orange btn-sm">Atras</a>
