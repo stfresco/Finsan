@@ -39,7 +39,7 @@ user1 = User.create!(
 )
 
 account1 = Account.create!(
-  bank: "Banco A",
+  bank: "BANCO A",
   account_type: "Checking",
   user_id: user1.id,
   currency: "USD"

@@ -2,7 +2,9 @@
     <%= c.input :title%>
     <%= c.input :description%>
     <%= c.input :status%>
-    <%= c.input :start_date%>
-    <%= c.input :finish_date%>
+    <%= c.input :start_date, as: :string,
+            input_html: { data: { controller: "datepicker" } }%>
+    <%= c.input :finish_date, as: :string,
+            input_html: { data: { controller: "datepicker" } }%>
      <%=c.submit %>
  <% end %>
