@@ -3,7 +3,7 @@
     <h1 class="display-4">Bienvenido, <%= @user.name || @user.email %></h1>
     <p class="lead">Aquí está un resumen de tu información.</p>
   </div>
-<<<<<<< HEAD
+
   <div class="text-center mb-4">
   <div class="mb-4 custom-card" style="background-image: url('/path/to/goals.jpg'); height: 300px;">
     <div class="card bg-transparent border-warning">
@@ -17,39 +17,16 @@
   </div>
 </div>
 
-  <div class="row d-flex flex-column align-items-center">
-    <div class="row d-flex justify-content-center mb-4">
+<div class="row d-flex justify-content-center mb-4">
   <div class="col-10 col-md-6 mb-4 custom-card" style="background-image: url('/path/to/accounts.jpg');">
     <div class="card bg-transparent border-primary">
       <div class="card-body text-">
         <h5 class="card-title text-dark"><i class="fa-solid fa-user"></i> Perfil</h5>
-        <a href="<%= edit_user_registration_path %>" class="btn btn-primary btn-sm">Perfil</a>
-=======
-
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Tus Cuentas</h5>
-
-          <a href="<%= accounts_path %>" class="btn btn-primary btn-sm">Gestionar Cuentas</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Tus transacciones</h5>
-
-          <a href="<%= goals_path %>" class="btn btn-primary btn-sm">Gestiona tus transacciones</a>
-        </div>
->>>>>>> e3152f4ed77869c0827c1addcd67039bc1c08377
+        <a href="<%= edit_user_registration_path %>" class="btn btn-primary btn-sm">Pefil</a>
       </div>
     </div>
   </div>
 
-<<<<<<< HEAD
   <div class="col-10 col-md-6 mb-4 custom-card" style="background-image: url('/path/to/accounts.jpg');">
     <div class="card bg-transparent border-primary">
       <div class="card-body text-">
@@ -69,6 +46,7 @@
       </div>
     </div>
   </div>
+
   <div class="col-10 col-md-6 mb-4 custom-card" style="background-image: url('/path/to/goals.jpg');">
     <div class="card bg-transparent border-warning">
       <div class="card-body text-">
@@ -80,20 +58,6 @@
 </div>
 
 
-=======
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Tus Objetivos</h5>
-          
-          <a href="<%= goals_path %>" class="btn btn-primary btn-sm">Gestionar Objetivos</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="text-center mt-4">
-    <a href="<%= dashboard_path %>" class="btn btn-success btn-lg">Ir al Dashboard</a>
->>>>>>> e3152f4ed77869c0827c1addcd67039bc1c08377
+</div>
   </div>
 </div>
