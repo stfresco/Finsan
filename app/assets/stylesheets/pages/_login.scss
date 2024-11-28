@@ -1,0 +1,79 @@
+.text-center.mb-4 {
+  background-color: #ffffff;
+  padding: 40px 20px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-card.first {
+  height: 300px; /* Cambia el valor según sea necesario */
+}
+
+
+.text-center.mb-4:hover {
+  background-color: #f7f7f7; /* Cambio de color al pasar el ratón */
+}
+
+.text-center.mb-4 h1 {
+  color: #333;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra en el texto */
+}
+
+.text-center.mb-4 p {
+  color: #666;
+}
+
+
+
+
+
+/* Ajustar márgenes y separación entre los divs */
+.text-center.mb-4 {
+  background-color: #f0f0f0; /* Color de fondo para el primer div */
+  padding: 40px;
+  border-radius: 15px;
+  margin-bottom: 20px; /* Añadir espacio debajo del primer div */
+}
+
+.row.d-flex.flex-column.align-items-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Asegura que haya espacio entre los divs de la fila */
+}
+
+.custom-card {
+  margin-bottom: 20px; /* Asegura que las tarjetas tengan separación */
+  background-size: cover; /* Asegura que las imágenes de fondo cubran el espacio */
+  background-position: center;
+  border-radius: 10px; /* Redondea las esquinas de las tarjetas */
+}
+
+/* Añadir estilos específicos para las tarjetas (card-body) */
+.custom-card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Asegura que el contenido esté en la parte inferior */
+  text-align: right; /* Alineación de texto en la parte inferior */
+  padding: 20px;
+  height: 250px; /* Ajusta según el tamaño deseado */
+  background: rgba(255, 255, 255, 0.7); /* Fondo semi-transparente */
+}
+
+/* Estilo de imagen de fondo en cada tarjeta */
+.custom-card {
+  background-size: cover; /* Asegura que las imágenes de fondo cubran el espacio */
+  background-position: center; /* Centra la imagen */
+  border-radius: 10px; /* Redondea las esquinas de las tarjetas */
+}
+
+/* Añadir efectos para evitar que el contenido se solape */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.text-center.mt-4 {
+  margin-top: 40px;
+}
