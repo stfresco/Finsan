@@ -1,4 +1,5 @@
-<h1>Transaciones de la cuenta del banco: <%= @account.bank %></h1>
+<%= turbo_frame_tag :transaction do %>
+
 <div class="content-with-navbar-spacing">
     <table class="table table-striped">
      <thead>
@@ -38,3 +39,4 @@
     </tbody>
   </table>
 </div>
+<% end %>

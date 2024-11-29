@@ -10,3 +10,5 @@
 <%= link_to "Edit", edit_account_path(@account), class: "btn btn-warning btn-sm" %>
 <%= link_to "Agregar Transacción", new_account_my_transaction_path(@account), class: "btn btn-warning btn-sm" %>
 <%= link_to "Atras", accounts_path, class: "btn btn-warning btn-sm" %>
+<%= link_to "Ver Transacciones", account_my_transactions_path(@account), class: "btn btn-warning btn-sm", data: {turbo_frame: :transaction} %>
+<%= turbo_frame_tag :transaction %>
