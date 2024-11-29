@@ -15,11 +15,11 @@ Rails.application.routes.draw do
   # Render dynamic PWA files from app/views/pwa/*
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  resources :my_transactions, only: [:edit, :index, :show]
+  resources :my_transactions, only: [:destroy, :update, :edit, :index, :show]
   get 'all_transactions', to: 'my_transactions#all_transactions'
 
   resources :accounts do
-    resources :my_transactions, only: [ :index, :new, :create]
+    resources :my_transactions, only: [:edit, :update, :index, :new, :create, :destroy]
   end
 
   resources :balances, only: [:edit, :update, :show]

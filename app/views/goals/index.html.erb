@@ -12,12 +12,16 @@
         <div class="card-body m-2">
           <h5 class="card-title"><%=g.title%></h5>
           <h3 class="text-success"></h3>
+<
           <%= link_to "Ver mas", goal_path(g), class: "btn btn-primary btn-sm"  %>
           <%= link_to "Editar", edit_goal_path(g), class: "btn btn-secondary btn-sm"  %>
+
 
         </div>
       </div>
     </div>
     <%end%>
-
   </div>
+
+<a href="<%= new_goal_path %>" class="btn btn-orange btn-sm">Agregar una Meta</a>
+<a href="<%= login_path %>" class="btn btn-orange btn-sm">Atras</a>

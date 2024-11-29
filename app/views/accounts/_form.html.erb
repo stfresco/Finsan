@@ -1,14 +1,63 @@
-<%= form_with model: account do |f| %>
+<%= simple_form_for(account) do |f| %>
   <%= f.label :bank %>
-  <%= f.text_field :bank %>
+  <%= f.text_field :bank, data: {
+                              controller: "capitalize",
+                              capitalize_target: "bank",
+                              action: "keyup->capitalize#capitalize"
+                            }
+  %>
 
-  <%= f.label :account_type %>
-  <%= f.text_field :account_type %>
 
- 
+ <%= f.input :account_type,
+            as: :select,
+                collection: ["Credito","Debito"],
+                include_blank:"Seleciona tipo de cuenta"
+  %>
 
-  <%= f.label :currency%>
-  <%= f.text_field :currency%>
+<%= f.input :currency,
+            as: :select,
+                collection: ["USD - Dólar estadounidense",
+                            "EUR - Euro",
+                            "PY - Yen japonés",
+                            "MXN - Peso mexicano",
+                            "PEN - Sol peruano",
+                            "CLP - Peso chileno",
+                            "ARS - Peso argentino",
+                            "BRL - Real brasileño",
+                            "BOB - Boliviano",
+                            "GBP - Libra esterlina",
+                            "CHF - Franco suizo",
+                            "CAD - Dólar canadiense",
+                            "AUD - Dólar australiano",
+                            "CNY - Renminbi o Yuan",
+                            "INR - Rupia india",
+                            "RUB - Rublo ruso",
+                            "KRW - Won surcoreano",
+                            "SGD - Dólar de Singapur",
+                            "MYR - Ringgit malasio",
+                            "SEK - Corona sueca",
+                            "NOK - Corona noruega",
+                            "COP - Peso colombiano",
+                            "DKK - Corona danesa",
+                            "ESP - Peseta española",
+                            "TRY - Lira turca",
+                            "AED - Dirham de los Emiratos Árabes Unidos",
+                            "ZAR - Rand sudafricano",
+                            "THB - Baht tailandés",
+                            "HUF - Florín húngaro",
+                            "ISK - Corona islandesa",
+                            "TWD - Nuevo dólar taiwanés",
+                            "PHP - Peso filipino",
+                            "AWG - Florín arubeño",
+                            "NZD - Dólar neozelandés",
+                            "PKR - Rupia pakistaní",
+                            "KZT - Tenge kazajo",
+                            "HKD - Dólar de Hong Kong",
+                            "DZD - Dinar argelino",
+                            "EGP - Libra egipcia",
+                            "VND - Dong vietnamita"],
+                include_blank:"Seleciona una moneda"
+  %>
 
   <%= f.submit %>
 <% end %>

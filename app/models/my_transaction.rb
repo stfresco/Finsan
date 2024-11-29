@@ -6,16 +6,19 @@ class MyTransaction < ApplicationRecord
   validates :date, presence: true
   validates :method, presence: true
 
+  attr_accessor :custom_category
+  
   after_create :update_balance_after_create
   before_update :store_previous_amount
   after_update :update_balance_after_update
   before_destroy :update_balance_before_destroy
 
+
   private
 
   def update_balance_after_create
     balance = account.balance
-    if mytransaction_type == "ingreso"
+    if mytransaction_type == "Ingreso"
       balance.update(total_amount: balance.total_amount + amount)
     else
       balance.update(total_amount: balance.total_amount - amount)
@@ -31,13 +34,13 @@ class MyTransaction < ApplicationRecord
     balance = account.balance
     current_total = balance.total_amount
 
-    if @previous_type == "ingreso"
+    if @previous_type == "Ingreso"
       current_total -= @previous_amount
     else
       current_total += @previous_amount
     end
 
-    if mytransaction_type == "ingreso"
+    if mytransaction_type == "Ingreso"
       current_total += amount
     else
       current_total -= amount
@@ -48,7 +51,7 @@ class MyTransaction < ApplicationRecord
 
   def update_balance_before_destroy
     balance = account.balance
-    if mytransaction_type == "ingreso"
+    if mytransaction_type == "Ingreso"
       balance.update(total_amount: balance.total_amount - amount)
     else
       balance.update(total_amount: balance.total_amount + amount)
