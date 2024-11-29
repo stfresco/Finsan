@@ -1,13 +1,14 @@
 class MyTransaction < ApplicationRecord
   belongs_to :account
   has_one_attached :image
+  belongs_to :goal, optional: true
 
   validates :amount, presence: true
   validates :date, presence: true
   validates :method, presence: true
 
   attr_accessor :custom_category
-  
+
   after_create :update_balance_after_create
   before_update :store_previous_amount
   after_update :update_balance_after_update
