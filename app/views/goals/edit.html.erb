@@ -1,9 +1,12 @@
+<div class="container w-25 border shadow mt-5 p-3">
+   <h2 class="text-center "><strong>Edita tu objetivo! </strong>🧑🏼‍💻</h2>
 <%= simple_form_for @goal do |c| %>
-    <%= c.input :title%>
-    <%= c.input :description%>
-    <%= c.input :status%>
-    <%= c.input :start_date%>
-    <%= c.input :finish_date%>
-     <%=c.submit %>
-  
+    <%= c.input :title , label:"Titulo"%>
+    <%= c.input :description , label: "Descripción"%>
+    <%= c.input :status, label:"Estado"%>
+    <%= c.input :start_date, label:"Fecha de inicio", html5: true%>
+    <%= c.input :finish_date, label:"Fecha de termino", html5: true%>
+    <%= c.button :submit, "Actualizar", class: "btn-success w-100" %>
+
  <% end %>
+</div>
