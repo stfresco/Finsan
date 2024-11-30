@@ -7,6 +7,8 @@
 <p><strong>Fecha de termino: </strong><%= @goal.finish_date %></p>
  <%= link_to "Delete", goal_path(@goal), class: "btn btn-danger btn-sm", data: {turbo_method: :delete}  %>
  <%= link_to "Registra una transaccion", accounts_path, class: "btn btn-primary btn-sm" %>
+ <%= link_to "Edita tu objetivo", edit_goal_path(@goal), class: "btn btn-primary btn-sm" %>
+ <a href="<%= goals_path %>" class="btn btn-primary btn-sm">Vuelve a tus objetivos</a>
  <h4>Transacciones para cumplir tu meta</h4>
  <% sum=0 %>
  <% @goal.my_transactions.each do |transaccion| %>
@@ -16,4 +18,4 @@
    <% sum += transaccion.amount %>
  <% end %>
  <%= sum  %>
- <%= @goal.amount - sum %>
+ <%= @goal.amount ? (@goal.amount - sum) : "Monto no definido" %>

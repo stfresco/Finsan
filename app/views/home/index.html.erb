@@ -1,52 +1,40 @@
 <div class="container mt-5">
-   <%= link_to content_tag(:i, "", class: "fa-solid fa-arrow-left"), login_path(@account), class: "btn btn-primary btn-sm" %>
-    <div class="text-center mb-4">
+   <div class="text-center mb-4">
      <h1 class="display-4 text-dark fw-bold">Tu Dashboard Financiero</h1>
      <p class="lead text-dark">Lleva el control de tus finanzas de manera efectiva.</p>
-    </div>
+   </div>
 
-   <div class="row">
-    <div class="col-md-4">
-      <div class="card text-center">
-        <div class="card-body">
-          <h5 class="card-title">Total en Cuentas</h5>
-          <h3 class="text-success">$</h3>
-          <button class="btn btn-primary btn-sm">Ver cuentas</button>
-        </div>
-      </div>
-    </div>
+   <div class="d-flex flex-column flex-lg-row gap-3">
+     <div class="d-flex flex-column gap-3 w-100">
+       <div class="card text-center">
+         <div class="card-body">
+           <h5 class="card-title">Cuentas registradas</h5>
+           <h3 class="text-success">Toatal de cuentas</h3>
+           <a href="<%= accounts_path %>" class="btn btn-primary btn-sm">Gestionar Cuentas</a>
+         </div>
+       </div>
 
-    <div class="col-md-4">
-      <div class="card text-center">
-        <div class="card-body">
-          <h5 class="card-title">Transacciones</h5>
-          <h3 class="text-info">-</h3>
-          <button class="btn btn-primary btn-sm">Ver transacciones</button>
-        </div>
-      </div>
-    </div>
+       <div class="card text-center">
+         <div class="card-body">
+           <h5 class="card-title">Transacciones</h5>
+           <h3 class="text-info">-</h3>
+         </div>
+       </div>
 
-    <div class="col-md-4">
-      <div class="card text-center">
-        <div class="card-body">
-          <h5 class="card-title">Objetivos Activos</h5>
-          <h3 class="text-warning">-</h3>
-          <button class="btn btn-primary btn-sm">Ver objetivos</button>
-        </div>
-      </div>
-    </div>
-  </div>
+       <div class="card text-center">
+         <div class="card-body">
+           <h5 class="card-title">Objetivos Activos</h5>
+           <h3 class="text-warning">-</h3>
+           <a href="<%= goals_path %>" class="btn btn-primary btn-sm">Gestionar Objetivos</a>
+         </div>
+       </div>
+     </div>
 
-  <div class="row mt-5">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Resumen Financiero</h5>
-          <canvas id="financialChart" style="width:100%; height:400px;"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
+     <div class="card flex-grow-1">
+       <div class="card-body">
+         <h5 class="card-title">Resumen Financiero</h5>
+         <canvas id="financialChart" style="width:80%; height:400px;"></canvas>
+       </div>
+     </div>
+   </div>
 </div>
-
-____________________________________

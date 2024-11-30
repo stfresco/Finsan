@@ -6,17 +6,16 @@
 }
 
 .custom-card.first {
-  height: 300px; /* Cambia el valor según sea necesario */
+  height: 150px;
 }
 
-
 .text-center.mb-4:hover {
-  background-color: #f7f7f7; /* Cambio de color al pasar el ratón */
+  background-color: #f7f7f7;
 }
 
 .text-center.mb-4 h1 {
   color: #333;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra en el texto */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .text-center.mb-4 p {
@@ -24,50 +23,37 @@
 }
 
 
-
-
-
-/* Ajustar márgenes y separación entre los divs */
 .text-center.mb-4 {
-  background-color: #f0f0f0; /* Color de fondo para el primer div */
+  background-color: #f0f0f0;
   padding: 40px;
   border-radius: 15px;
-  margin-bottom: 20px; /* Añadir espacio debajo del primer div */
+  margin-bottom: 20px;
 }
 
 .row.d-flex.flex-column.align-items-center {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px; /* Asegura que haya espacio entre los divs de la fila */
+  gap: 20px;
 }
 
-.custom-card {
-  margin-bottom: 20px; /* Asegura que las tarjetas tengan separación */
-  background-size: cover; /* Asegura que las imágenes de fondo cubran el espacio */
-  background-position: center;
-  border-radius: 10px; /* Redondea las esquinas de las tarjetas */
-}
 
-/* Añadir estilos específicos para las tarjetas (card-body) */
 .custom-card .card-body {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* Asegura que el contenido esté en la parte inferior */
-  text-align: right; /* Alineación de texto en la parte inferior */
+  justify-content: flex-end;
+  text-align: right;
   padding: 20px;
-  height: 250px; /* Ajusta según el tamaño deseado */
-  background: rgba(255, 255, 255, 0.7); /* Fondo semi-transparente */
+  height: 250px;
+  background: rgba(255, 255, 255, 0.7);
 }
 
-/* Estilo de imagen de fondo en cada tarjeta */
 .custom-card {
-  background-size: cover; /* Asegura que las imágenes de fondo cubran el espacio */
-  background-position: center; /* Centra la imagen */
-  border-radius: 10px; /* Redondea las esquinas de las tarjetas */
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
 }
 
-/* Añadir efectos para evitar que el contenido se solape */
 .clearfix::after {
   content: "";
   display: table;
@@ -76,4 +62,27 @@
 
 .text-center.mt-4 {
   margin-top: 40px;
+}
+
+.custom-card.card-rectangle {
+  height: 200px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-card.card-rectangle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.custom-card .card-body {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 5px;
 }
