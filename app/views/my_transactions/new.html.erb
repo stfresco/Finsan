@@ -56,13 +56,12 @@
                   }
       %>
     </div>
-                    <%= c.input :amount, input_html:{
-                                            data: {
-                                              check_balance_target: "amount",
-                                              action: "keyup->check-balance#saldo"
-                                            }
-                    }
-                    %>
+    <%= c.input :amount, input_html:{
+      data: {
+        check_balance_target: "amount",
+        action: "keyup->check-balance#saldo"
+      }
+    }%>
     <%= c.association :goal %>
     <%= c.input :method,  as: :select,
                 collection: ["Efectivo",

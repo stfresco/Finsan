@@ -16,7 +16,6 @@
   <%end%>
 </div>
 
-<%= link_to content_tag(:i, "", class: "fa-solid fa-arrow-left"), login_path(@account), class: "btn btn-primary btn-sm" %> |
 <%= link_to "Agregar una cuenta", new_account_path(@account), class: "btn btn-primary btn-sm" %>
-
+<a href="<%= home_path %>" class="btn btn-success btn-sm"> Dashboard</a>
 

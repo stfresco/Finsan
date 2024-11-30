@@ -4,8 +4,11 @@
     <%= c.input :title , label:"Titulo"%>
     <%= c.input :description , label: "Descripción"%>
     <%= c.input :status, label:"Estado"%>
+    <%= c.input :amount%>
     <%= c.input :start_date, label:"Fecha de inicio", html5: true%>
     <%= c.input :finish_date, label:"Fecha de termino", html5: true%>
     <%= c.button :submit, "Actualizar", class: "btn-success w-100" %>
+    <%= link_to "Cancelar", goal_path(@goal), class: "btn btn-primary btn-sm" %>
+
  <% end %>
 </div>
