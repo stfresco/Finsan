@@ -16,4 +16,4 @@
    <% sum += transaccion.amount %>
  <% end %>
  <%= sum  %>
- <%= @goal.amount - sum %>
+<%= @goal.amount ? (@goal.amount - sum) : "Monto no definido" %>
