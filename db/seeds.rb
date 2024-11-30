@@ -75,6 +75,7 @@ goal1 = Goal.create!(
   status: "in_progress",
   start_date: Date.today,
   finish_date: Date.today + 6.months,
+  amount: 10_000,
   user_id: user1.id
 )
 

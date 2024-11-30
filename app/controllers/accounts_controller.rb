@@ -28,7 +28,7 @@ class AccountsController < ApplicationController
     if @account.save
       redirect_to account_path(@account)
     else
-      render :new
+      render :new, status: :unprocessable_entity, alert: "We had a problem processing your goal"
     end
   end
 
@@ -39,7 +39,7 @@ class AccountsController < ApplicationController
     if @account.update(account_params)
       redirect_to account_path(@account)
     else
-      render :edit
+      render :edit, status: :unprocessable_entity, alert: "We had a problem processing your goal"
     end
   end
 

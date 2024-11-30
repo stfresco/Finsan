@@ -1,14 +1,48 @@
-<h2> <strong>Banco: </strong><%= @account.bank %></h2>
-<p><strong>Tipo de Cuenta: </strong><%= @account.account_type %></p>
-<p><strong>Código de Usuario: </strong><%= @account.user_id %></p>
-<p><strong>Moneda: </strong><%= @account.currency %></p>
-<p><strong>Saldo Disponible: </strong><%= @account.balance.total_amount %></p>
-<%= link_to "Delete",
-  account_path(@account), class: "btn btn-danger btn-sm",
-  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-%>
-<%= link_to "Edit", edit_account_path(@account), class: "btn btn-warning btn-sm" %>
-<%= link_to "Agregar Transacción", new_account_my_transaction_path(@account), class: "btn btn-warning btn-sm" %>
-<%= link_to "Atras", accounts_path, class: "btn btn-warning btn-sm" %>
-<%= link_to "Ver Transacciones", account_my_transactions_path(@account), class: "btn btn-warning btn-sm", data: {turbo_frame: :transaction} %>
-<%= turbo_frame_tag :transaction %>
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h2 class="card-title text-primary mb-4">
+        <strong>Banco:</strong> <%= @account.bank %>
+      </h2>
+      <p class="card-text mb-2">
+        <strong>Tipo de Cuenta:</strong> <%= @account.account_type %>
+      </p>
+      <p class="card-text mb-2">
+        <strong>Código de Usuario:</strong> <%= @account.user_id %>
+      </p>
+      <p class="card-text mb-2">
+        <strong>Moneda:</strong> <%= @account.currency %>
+      </p>
+      <p class="card-text mb-4">
+        <strong>Saldo Disponible:</strong>
+        <span class="text-success fw-bold">
+          <%= number_to_currency(@account.balance.total_amount, unit: "$") %>
+        </span>
+      </p>
+
+      <div class="d-flex flex-wrap gap-2">
+        <%= link_to content_tag(:i, "", class: "fa-solid fa-arrow-left me-1") + " Regresar",
+                    accounts_path,
+                    class: "btn btn-primary btn-sm d-flex align-items-center" %>
+        <%= link_to content_tag(:i, "", class: "fa-solid fa-trash me-1") + " Eliminar",
+                    account_path(@account),
+                    class: "btn btn-danger btn-sm d-flex align-items-center",
+                    data: { turbo_method: :delete, turbo_confirm: "¿Estás seguro de que deseas eliminar esta cuenta?" } %>
+        <%= link_to content_tag(:i, "", class: "fa-solid fa-pen me-1") + " Editar",
+                    edit_account_path(@account),
+                    class: "btn btn-warning btn-sm d-flex align-items-center" %>
+        <%= link_to content_tag(:i, "", class: "fa-solid fa-plus me-1") + " Agregar Transacción",
+                    new_account_my_transaction_path(@account),
+                    class: "btn btn-success btn-sm d-flex align-items-center" %>
+        <%= link_to content_tag(:i, "", class: "fa-solid fa-list me-1") + " Ver Transacciones",
+                    account_my_transactions_path(@account),
+                    class: "btn btn-info btn-sm d-flex align-items-center",
+                    data: { turbo_frame: :transaction } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <%= turbo_frame_tag :transaction %>
+  </div>
+</div>

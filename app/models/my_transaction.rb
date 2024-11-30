@@ -3,7 +3,7 @@ class MyTransaction < ApplicationRecord
   has_one_attached :image
   belongs_to :goal, optional: true
 
-  validates :amount, presence: true
+  validates :amount, :mytransaction_type, :category, presence: true
   validates :date, presence: true
   validates :method, presence: true
 

@@ -1,0 +1,127 @@
+<div class="container w-26 border shadow mt-5 p-3" data-controller="check-balance category-toggle">
+  <h2 class="text-center mb-4">
+    <strong><%= @transaction.persisted? ? "Edita tu Transacción! ✏️" : "Crea tu transacción! " %></strong> 🧑🏼‍💻
+  </h2>
+  <h1 class="text-end text-success mb-4">Balance:
+    <span id="balance" data-check-balance-target="balance">
+      <%= @account.balance.total_amount %>
+    </span>
+  </h1>
+
+  <%= simple_form_for [@account, @transaction] do |c| %>
+    <div class="mb-3">
+      <%= c.input :mytransaction_type,
+                  as: :select,
+                  collection: ["Ingreso", "Egreso"],
+                  include_blank: "Selecciona una opción",
+                  input_html: {
+                    data: {
+                      action: "change->check-balance#disableEgreso",
+                      check_balance_target: "select"
+                    },
+                    class: "form-select"
+                  }
+      %>
+    </div>
+
+    <div class="mb-3">
+      <%= c.input :category,
+                  as: :select,
+                  collection: ["Sueldo", "Bonificaciones", "Ingresos por Alquiler", "Venta de bienes", "Comida",
+                               "Entretenimiento", "Inversiones", "Pensiones", "Subsidios", "Pago de alquiler",
+                               "Pago transporte", "Pago Supermercado", "Pago Restaurantes", "Pago Seguro Médico",
+                               "Pago Consulta Médica", "Compra Medicamentos", "Pago de impuestos",
+                               "Compra de Ropa y Calzado", "Reparación y mantenimiento del hogar", "Otra"],
+                  include_blank: "Selecciona una categoría",
+                  input_html: {
+                    data: {
+                      action: "change->category-toggle#toggleCustomCategory",
+                      category_toggle_target: "select"
+                    },
+                    class: "form-select"
+                  }
+      %>
+    </div>
+
+    <div id="custom-category-field"
+         data-category-toggle-target="customCategory"
+         style="display: none;">
+      <%= c.input :custom_category,
+                  label: "Nueva categoría",
+                  input_html: {
+                    placeholder: "Escribe tu categoría",
+                    class: "form-control"
+                  }
+      %>
+    </div>
+
+    <div class="mb-3">
+      <%= c.input :amount,
+                  input_html: {
+                    data: {
+                      check_balance_target: "amount",
+                      action: "keyup->check-balance#saldo"
+                    },
+                    class: "form-control"
+                  }
+      %>
+    </div>
+
+    <div class="mb-3">
+      <%= c.association :goal, class: "form-select" %>
+    </div>
+
+    <div class="mb-3">
+      <%= c.input :method,
+                  as: :select,
+                  collection: ["Efectivo", "Tarjeta de crédito", "Tarjeta de débito", "Transferencia Bancaria",
+                               "Billetera electrónica", "Otra"],
+                  include_blank: "Selecciona un metodo de pago",
+                  class: "form-select"
+      %>
+    </div>
+
+    <div class="mb-3">
+      <%= c.input :description, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= c.input :date, as: :string,
+                        input_html: {
+                          data: { controller: "datepicker" },
+                          class: "form-control"
+                        }
+      %>
+    </div>
+
+    <div class="text-center">
+      <%= c.submit @transaction.persisted? ? "Actualizar transacción" : "Crear transacción", data: { check_balance_target: "submit" }, class: "btn btn-primary fw-bold" %>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+<%# <script>
+  const selector = document.querySelector("select")
+  const balance = parseFloat(document.getElementById("balance").innerText)
+  const amount = document.querySelector("#my_transaction_amount")
+  selector.addEventListener("change", () => {
+    if (balance === 0.0) {
+      document.querySelector('input[name="commit"]').disabled = true
+      alert("Tu saldo está en cero, no puedes hacer egresos")
+    }
+  })
+  amount.addEventListener("keyup", () => {
+    const submitButton = document.querySelector('input[name="commit"]');
+    if (parseFloat(amount.value) > balance) {
+      amount.style.color = "red"; // Cambiar color del monto
+      submitButton.disabled = true; // Deshabilitar el botón
+      alert("Tu saldo es menor a tus egresos, no puedes hacer egresos");
+    } else {
+      amount.style.color = ""; // Restaurar el color original
+      submitButton.disabled = false; // Habilitar el botón si la condición es válida
+    }
+  });
+</script> %>
