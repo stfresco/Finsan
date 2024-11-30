@@ -74,6 +74,7 @@ goal1 = Goal.create!(
   description: "Ahorrar para un viaje de vacaciones",
   status: "in_progress",
   start_date: Date.today,
+  amount: 1000,
   finish_date: Date.today + 6.months,
   user_id: user1.id
 )

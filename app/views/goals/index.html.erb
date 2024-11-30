@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
    <div class="text-center mb-4">
      <h1 class="display-4">Tus objetivos! 😎</h1>
@@ -23,3 +24,55 @@
 
 <a href="<%= new_goal_path %>" class="btn btn-orange btn-sm">Agregar una Meta</a>
 <a href="<%= home_path %>" class="btn btn-success btn-sm"> Dashboard</a>
+=======
+<div class="container my-5 position-relative">
+  
+  <div class="text-center mb-4">
+    <h1 class="display-4 text-success">¡Tus objetivos! <i class="fa-solid fa-chart-line"></i></h1>
+    <p class="lead text-secondary">Administra y alcanza tus metas fácilmente</p>
+    <hr class="w-50 mx-auto" style="border-top: 3px solid #28a745;">
+  </div>
+
+
+  <div class="row justify-content-center">
+    <% @goals.each do |g| %>
+      <div class="col-md-4 col-sm-6 mb-4">
+        <div class="card shadow-lg h-100 border-0">
+          <div class="card-body text-center">
+            <i class="fa-solid fa-chart-bar text-success mb-3" style="font-size: 2rem;"></i>
+            <h5 class="card-title text-dark font-weight-bold"><%= g.title %></h5>
+            <%= link_to "Ver más", goal_path(g), class: "btn btn-success btn-sm mx-1" %>
+            <%= link_to "Editar", edit_goal_path(g), class: "btn btn-outline-dark btn-sm mx-1" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mt-5">
+    <%= link_to "← Atrás", login_path, class: "btn btn-outline-success btn-sm" %>
+    <%= link_to "Agregar una Meta", new_goal_path, class: "btn btn-success btn-sm" %>
+  </div>
+
+
+  <div class="position-fixed top-50 start-0 translate-middle-y">
+    <div class="bg-success text-white rounded-circle p-3 mb-3 shadow" style="cursor: pointer;" title="Inicio">
+      <i class="fa-solid fa-house"></i>
+    </div>
+    <div class="bg-success text-white rounded-circle p-3 mb-3 shadow" style="cursor: pointer;" title="Estadísticas">
+      <i class="fa-solid fa-chart-pie"></i>
+    </div>
+    <div class="bg-success text-white rounded-circle p-3 mb-3 shadow" style="cursor: pointer;" title="Configuración">
+      <i class="fa-solid fa-gear"></i>
+    </div>
+  </div>
+
+
+  <div class="mt-5 py-4 bg-light text-center">
+    <h6 class="text-secondary">¿Necesitas ayuda para alcanzar tus metas?</h6>
+    <p class="mb-4 text-muted">Consulta nuestras guías y recursos para planificar tus objetivos.</p>
+    <%= link_to "Ver recursos", "#", class: "btn btn-outline-success btn-sm" %>
+    <%= link_to "Contacto", "#", class: "btn btn-outline-dark btn-sm" %>
+  </div>
+</div>
+>>>>>>> 5cf95ec2b177c8ac147fdf5fb952d85c143959a2
