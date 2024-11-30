@@ -74,6 +74,6 @@ class MyTransactionsController < ApplicationController
   private
 
   def transaction_params
-    params.require(:my_transaction).permit(:category, :custom_category, :amount, :date, :method, :description, :mytransaction_type, :goal_id)
+    params.require(:my_transaction).permit(:category, :custom_category, :amount, :date, :method, :description, :mytransaction_type, :goal_id, :account_id)
   end
 end
