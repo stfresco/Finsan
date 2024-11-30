@@ -3,7 +3,7 @@
   <h1 style="color: #00c897; font-weight: bold; text-align: center;">Detalle de Meta</h1>
 
   <div class="goal-details-container" style="display: flex; justify-content: space-between; gap: 20px;">
-    <!-- Detalles de la Meta -->
+   
     <div class="goal-details" style="flex: 1; padding: 20px; background: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
       <p><strong style="color: #00c897;">Monto: </strong><%= @goal.amount || "Monto no definido" %></p>
       <p><strong style="color: #00c897;">Título de meta: </strong><%= @goal.title %></p>
@@ -13,14 +13,14 @@
       <p><strong style="color: #00c897;">Fecha de Término: </strong><%= @goal.finish_date %></p>
     </div>
 
-    <!-- Gráfico de Progreso -->
+
     <div class="goal-chart" style="flex: 1; padding: 20px; background: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
       <h4 style="color: #00c897;">Progreso</h4>
       <canvas id="goalProgressChart" width="200" height="200"></canvas>
     </div>
   </div>
 
-  <!-- Transacciones -->
+
   <div class="goal-transactions" style="margin: 20px auto; max-width: 600px; padding: 20px; background: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
     <h3 style="color: #00c897;">Transacciones Relacionadas</h3>
     <ul style="list-style: none; padding: 0;">
