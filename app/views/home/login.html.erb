@@ -1,47 +1,28 @@
 <div class="container mt-5">
   <div class="text-center mb-2">
     <h1 class="display-4">Bienvenido, <%= @user.name || @user.email %></h1>
-    <p class="lead">Aquí está un resumen de tu información.</p>
   </div>
 
-  <div class="text-center mb-4">
-  <div class="mb-4 custom-card" style="background-image: url('/path/to/goals.jpg'); height: 300px;">
-    <div class="card bg-transparent border-warning">
-      <div class="card-body text-">
+  <div class="text-center mb-6">
+    <div class="mb-4 custom-card card-rectangle" style="background-image: url('/path/to/goals.jpg');">
+      <div class="card-body">
         <h5 class="card-title text-dark"><i class="fa-regular fa-map"></i> Dashboard </h5>
-      </div>
-      <div class="text-center mt-4">
-        <a href="<%= home_path %>" class="btn btn-success btn-lg"> Dashboard</a>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row d-flex justify-content-center mb-4">
-  <div class="col-10 col-md-6 mb-4 custom-card" style="background-image: url('/path/to/accounts.jpg');">
-    <div class="card bg-transparent border-primary">
-      <div class="card-body text-">
-        <h5 class="card-title text-dark"><i class="fa-solid fa-user"></i> Perfil</h5>
-        <a href="<%= edit_user_registration_path %>" class="btn btn-primary btn-sm">Pefil</a>
+        <div class="text-center mt-4">
+          <a href="<%= home_path %>" class="btn btn-success btn-lg"> Dashboard</a>
+        </div>
       </div>
     </div>
   </div>
-<div class="col-10 col-md-6 mb-4 custom-card" style="background-image: url('/path/to/accounts.jpg');">
-    <div class="card bg-transparent border-primary">
-      <div class="card-body text-">
-        <h5 class="card-title text-dark"><i class="fas fa-wallet"></i> Tus Cuentas</h5>
-        <a href="<%= accounts_path %>" class="btn btn-primary btn-sm">Gestionar Cuentas</a>
-      </div>
+  <div class="mb-4 custom-card card-rectangle" style="background-image: url('/path/to/goals.jpg');">
+    <div class="card-body">
+      <h5 class="card-title text-dark"><i class="fas fa-bullseye"></i> Tus Objetivos</h5>
+      <a href="<%= goals_path %>" class="btn btn-primary btn-sm">Gestionar Objetivos</a>
     </div>
   </div>
-</div>
-
-<div class="row d-flex justify-content-center">
-  <div class="col-10 col-md-6 mb-4 custom-card" style="background-image: url('/path/to/goals.jpg');">
-    <div class="card bg-transparent border-warning">
-      <div class="card-body text-">
-        <h5 class="card-title text-dark"><i class="fas fa-bullseye"></i> Tus Objetivos</h5>
-        <a href="<%= goals_path %>" class="btn btn-primary btn-sm">Gestionar Objetivos</a>
-      </div>
+  <div class="mb-4 custom-card card-rectangle" style="background-image: url('/path/to/accounts.jpg');">
+    <div class="card-body">
+      <h5 class="card-title text-dark"><i class="fas fa-wallet"></i> Tus Cuentas</h5>
+      <a href="<%= accounts_path %>" class="btn btn-primary btn-sm">Gestionar Cuentas</a>
     </div>
   </div>
 </div>
