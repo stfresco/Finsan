@@ -9,6 +9,6 @@
     <%= c.input :finish_date, as: :string,
             input_html: { data: { controller: "datepicker" } }%>
     <%= c.input :amount%>
-     <%=c.submit %>
+    <a href="<%= login_path %>" class="btn btn-orange btn-sm">Atras</a> | <%=c.submit %>
  <% end %>
 </div>
