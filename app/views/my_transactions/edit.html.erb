@@ -1,11 +1,14 @@
-<%= simple_form_for [@account, @transaction] do |c| %>
-    <%= c.input :category%>
-    <%= c.input :amount%>
-    <%= c.input :method%>
-    <%= c.input :description%>
-    <%= c.input :date, as: :string,
+<%#= simple_form_for [@account, @transaction] do |c| %>
+    <%#= c.input :category%>
+    <%#= c.input :amount%>
+    <%#= c.input :method%>
+    <%#= c.input :description%>
+    <%#= c.input :date, as: :string,
             input_html: { data: { controller: "datepicker" } }%>
-    <%=c.submit data: {check_balance_target: "submit"}%>
-    <%= c.input :mytransaction_type, as: :select, collection: ["Ingreso","Egreso"], include_blank:"Seleciona una opción" %>
-    <%=c.submit %>
+    <%#=c.submit data: {check_balance_target: "submit"}%>
+    <%#= c.input :mytransaction_type, as: :select, collection: ["Ingreso","Egreso"], include_blank:"Seleciona una opción" %>
+    <%#=c.submit %>
+<%# end %>
+<%= turbo_frame_tag :transaction do %>
+<%= render 'form' %>
 <% end %>

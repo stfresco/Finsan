@@ -1,6 +1,21 @@
+<%= turbo_frame_tag :transaction do %>
+  <div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <p class="card-text mb-2">
+        <strong>Categoria:</strong>  <%= @transaction.category %>
+      </p>
+      <p class="card-text mb-2">
+        <strong>Monto:</strong> <%= @transaction.amount %>
+      </p>
+      <p class="card-text mb-2">
+        <strong>Fecha:</strong> <%= @transaction.date %>
+      </p>
+      <p class="card-text mb-2">
+        <strong>Monto:</strong> <%= @transaction.mytransaction_type %>
+      </p>
+     </div>
+    </div>
+  </div>
 
-<%=@transaction.category%>
-<%=@transaction.method %>
-<%= @transaction.amount %>
-<%= @transaction.description %>
-<%= @transaction.date%>
+<% end %>
