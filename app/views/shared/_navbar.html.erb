@@ -1,8 +1,8 @@
 
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to login_path, class: "navbar-brand" do %>
-      <%= image_tag "https://cdn-icons-png.flaticon.com/512/9546/9546628.png" %>
+    <%= link_to login_path, class: "navbar-brand d-flex align-items-center justify-content-center bg-white text-black rounded-circle shadow text-decoration-none" do %>
+      <%= image_tag "https://cdn-icons-png.flaticon.com/512/9546/9546628.png", style: "width: 32px; height: 32px;" %>
       <span class="ms-2 fw-bold text-uppercase">Finsan</span>
     <% end %>
 
@@ -13,17 +13,21 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", login_path, class: "nav-link" %>
+          <li class="nav-item me-3">
+            <%= link_to login_path, class: "d-inline-block bg-success text-white rounded-circle p-3 shadow text-decoration-none d-flex align-items-center justify-content-center", style: "width: 50px; height: 50px;" do %>
+              <i class="fa-solid fa-house"></i>
+            <% end %>
           </li>
-          <li class="nav-item">
-            <%= link_to "Dashboard", home_path, class: "nav-link" %>
+          <li class="nav-item me-3">
+            <%= link_to home_path, class: "d-inline-block bg-success text-white rounded-circle p-3 shadow text-decoration-none d-flex align-items-center justify-content-center", style: "width: 50px; height: 50px;" do %>
+              <i class="fa-solid fa-map"></i>
+            <% end %>
           </li>
           <li class="nav-item dropdown">
-            <%= image_tag "https://static.vecteezy.com/system/resources/previews/000/574/512/non_2x/vector-sign-of-user-icon.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <%= image_tag "https://static.vecteezy.com/system/resources/previews/000/574/512/non_2x/vector-sign-of-user-icon.jpg", class: "avatar dropdown-toggle shadow", id: "navbarDropdown", style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Perfil", edit_user_registration_path, class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
+              <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: { turbo_method: :delete } %>
             </div>
           </li>
         <% else %>

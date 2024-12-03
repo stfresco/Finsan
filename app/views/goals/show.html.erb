@@ -1,44 +1,44 @@
-<h1>My goal</h1>
-<p><Strong>Monto: </Strong><%= @goal.amount %></p>
-<p><Strong>Titulo de meta: </Strong><%= @goal.title %></p>
-<p><Strong>Descripción: </Strong><%= @goal.description %></p>
-<p><strong>Estado: </strong><%= @goal.status %></p>
-<p><strong>Fecha de Inicio: </strong><%= @goal.start_date %></p>
-<p><strong>Fecha de termino: </strong><%= @goal.finish_date %></p>
- <%= link_to "Delete", goal_path(@goal), class: "btn btn-danger btn-sm", data: {turbo_method: :delete}  %>
- <%= link_to "Registra una transaccion", accounts_path, class: "btn btn-primary btn-sm" %>
+<%= turbo_frame_tag :transaction do %>
+  <h1>My goal</h1>
+  <p><Strong>Monto: </Strong><%= @goal.amount %></p>
+  <p><Strong>Titulo de meta: </Strong><%= @goal.title %></p>
+  <p><Strong>Descripción: </Strong><%= @goal.description %></p>
+  <p><strong>Estado: </strong><%= @goal.status %></p>
+  <p><strong>Fecha de Inicio: </strong><%= @goal.start_date %></p>
+  <p><strong>Fecha de termino: </strong><%= @goal.finish_date %></p>
+   <%= link_to "Delete", goal_path(@goal), class: "btn btn-danger btn-sm", data: {turbo_method: :delete}  %>
+   <%= link_to "Registra una transaccion", accounts_path, class: "btn btn-primary btn-sm" %>
 
-<div class="content-with-navbar-spacing">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Banco</th>
-        <th scope="col">Monto</th>
-        <th scope="col">Fecha</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% sum = 0 %>
-      <% @goal.my_transactions.each do |transaction| %>
+  <div class="content-with-navbar-spacing">
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <td><%= transaction.account.bank %></td>
-          <td><%= l(transaction.date, format: :short) %></td>
-          <td><%= number_to_currency(transaction.amount, unit: "S/ ", delimiter: ",", precision: 2) %></td>
+          <th scope="col">Banco</th>
+          <th scope="col">Monto</th>
+          <th scope="col">Fecha</th>
         </tr>
-        <% sum += transaction.amount %>
-      <% end %>
-    </tbody>
-    <tfoot>
-      <tr>
-        <th colspan="2">Total Acumulado:</th>
-        <td><%= number_to_currency(sum, unit: "S/ ", delimiter: ",", precision: 2) %></td>
-      </tr>
-      <tr>
-        <th colspan="2">Meta Restante:</th>
-        <td><%= number_to_currency(@goal.amount - sum, unit: "S/ ", delimiter: ",", precision: 2) %></td>
-      </tr>
-    </tfoot>
-  </table>
-</div>
-
-
+      </thead>
+      <tbody>
+        <% sum = 0 %>
+        <% @goal.my_transactions.each do |transaction| %>
+          <tr>
+            <td><%= transaction.account.bank %></td>
+            <td><%= l(transaction.date, format: :short) %></td>
+            <td><%= number_to_currency(transaction.amount, unit: "S/ ", delimiter: ",", precision: 2) %></td>
+          </tr>
+          <% sum += transaction.amount %>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="2">Total Acumulado:</th>
+          <td><%= number_to_currency(sum, unit: "S/ ", delimiter: ",", precision: 2) %></td>
+        </tr>
+        <tr>
+          <th colspan="2">Meta Restante:</th>
+          <td><%= number_to_currency(@goal.amount - sum, unit: "S/ ", delimiter: ",", precision: 2) %></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+<% end %>
