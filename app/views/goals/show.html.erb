@@ -1,42 +1,95 @@
-<div class="goal-show-container" style="background-color: #f5f5f5; padding: 20px; border-radius: 10px;">
-  <h1 style="color: #00c897; font-weight: bold; text-align: center;">Detalle de Meta</h1>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <div class="goal-details-container" style="display: flex; justify-content: space-between; gap: 20px;">
-   
-    <div class="goal-details" style="flex: 1; padding: 20px; background: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
-      <p><strong style="color: #00c897;">Monto: </strong><%= @goal.amount || "Monto no definido" %></p>
-      <p><strong style="color: #00c897;">Título de meta: </strong><%= @goal.title %></p>
-      <p><strong style="color: #00c897;">Descripción: </strong><%= @goal.description %></p>
-      <p><strong style="color: #00c897;">Estado: </strong><%= @goal.status %></p>
-      <p><strong style="color: #00c897;">Fecha de Inicio: </strong><%= @goal.start_date %></p>
-      <p><strong style="color: #00c897;">Fecha de Término: </strong><%= @goal.finish_date %></p>
+<div class="goal-show-container" style="background-color: #f5f5f5; padding: 20px; border-radius: 10px; max-width: 800px; margin: 20px auto; position: relative;">
+
+  <div style="position: fixed; bottom: 20px; left: 20px;">
+    <%= link_to "← Atrás", goals_path, class: "btn btn-back", style: "background-color: #f5f5f5; color: #00c897; padding: 10px 20px; border-radius: 5px; border: 2px solid #00c897; text-decoration: none; font-weight: bold;" %>
+  </div>
+
+  <h1 style="color: #00c897; font-weight: bold; text-align: center;"><%= @goal.title %></h1>
+
+  <div class="goal-details-container" style="display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+
+    <div class="goal-details" style="flex: 1; padding: 20px; background-color: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+      <p><strong style="color: #00c897;">Descripción:</strong> <%= @goal.description %></p>
+      <p><strong style="color: #00c897;">Monto:</strong> <%= @goal.amount || "Monto no definido" %></p>
+      <p><strong style="color: #00c897;">Estado:</strong> <%= @goal.status == "in_progress" ? "Activo" : @goal.status %></p>
+      <p><strong style="color: #00c897;">Fecha de Inicio:</strong> <%= @goal.start_date %></p>
+      <p><strong style="color: #00c897;">Fecha de Término:</strong> <%= @goal.finish_date %></p>
     </div>
 
 
-    <div class="goal-chart" style="flex: 1; padding: 20px; background: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <div class="goal-chart" style="flex: 1; padding: 20px; background-color: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
       <h4 style="color: #00c897;">Progreso</h4>
-      <canvas id="goalProgressChart" width="200" height="200"></canvas>
+      <canvas id="goalProgressBarChart" width="400" height="200"></canvas>
     </div>
   </div>
 
 
-  <div class="goal-transactions" style="margin: 20px auto; max-width: 600px; padding: 20px; background: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+  <div class="goal-transactions" style="margin: 20px auto; max-width: 600px; padding: 20px; background-color: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
     <h3 style="color: #00c897;">Transacciones Relacionadas</h3>
     <ul style="list-style: none; padding: 0;">
       <% sum = 0 %>
       <% @goal.my_transactions.each do |transaction| %>
         <li style="margin: 10px 0; padding: 10px; border-bottom: 1px solid #eee;">
-          <p><strong>Cantidad: </strong><%= transaction.amount %></p>
-          <p><strong>Fecha: </strong><%= transaction.date %></p>
-          <p><strong>Banco: </strong><%= transaction.account.bank %></p>
+          <p><strong style="color: #00c897;">Cantidad:</strong> <%= transaction.amount %></p>
+          <p><strong style="color: #00c897;">Fecha:</strong> <%= transaction.date %></p>
+          <p><strong style="color: #00c897;">Banco:</strong> <%= transaction.account.bank %></p>
           <% sum += transaction.amount %>
         </li>
       <% end %>
     </ul>
-    <p><strong style="color: #00c897;">Total Ahorrado: </strong><%= sum %></p>
-    <p><strong style="color: #00c897;">Restante: </strong><%= @goal.amount ? (@goal.amount - sum) : "Monto no definido" %></p>
+    <p><strong style="color: #00c897;">Total Ahorrado:</strong> <%= sum %></p>
+    <p><strong style="color: #00c897;">Restante:</strong> <%= @goal.amount ? [@goal.amount - sum, 0].max : "Monto no definido" %></p>
   </div>
 
+
   <div class="goal-actions" style="text-align: center; margin-top: 20px;">
-    <%= link_to "Registra una transacción", accounts_path, class: "btn btn-primary", style: "background-color: #00c897; border: none; padding: 10px 20px; color: white; border-radius: 5px; text-decoration: none;" %>
-    <%= link_to "Eliminar Meta", goal_path(@goal), method: :delete, data: { turbo_method: :delete }, class: "btn btn-danger", style: "margin-left: 10px; background-color: #ff6b6b; border: none; pad" %>
+    <%= link_to "Registrar una transacción", accounts_path, class: "btn btn-add", style: "background-color: #00c897; color: white; font-weight: bold; padding: 10px 20px; border-radius: 5px; border: none; text-decoration: none; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);" %>
+    <%= link_to "Eliminar Meta", goal_path(@goal), method: :delete, data: { turbo_method: :delete }, class: "btn btn-danger", style: "margin-left: 10px; background-color: #ff6b6b; border: none; padding: 10px 20px; color: white; border-radius: 5px; text-decoration: none;" %>
+  </div>
+
+
+  <div class="goal-tips" style="margin-top: 30px; text-align: center; color: #7a7a7a;">
+    <p>¿Necesitas ayuda para alcanzar tus metas?</p>
+    <p>Consulta nuestras guías y recursos para planificar tus objetivos.</p>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("turbo:load", function () {
+    const ctx = document.getElementById("goalProgressBarChart").getContext("2d");
+    const total = <%= @goal.amount || 0 %>;
+    const saved = <%= sum %>;
+    const remaining = Math.max(total - saved, 0);
+
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Ahorrado", "Restante"],
+        datasets: [{
+          label: "Progreso del Objetivo",
+          data: [saved, remaining],
+          backgroundColor: ["#00c897", "#ff6b6b"],
+          borderColor: ["#00a57d", "#d9534f"],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: true,
+            position: "top"
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  });
+</script>
