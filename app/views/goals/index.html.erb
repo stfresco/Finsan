@@ -24,27 +24,12 @@
 
   <div class="d-flex justify-content-between align-items-center mt-5">
     <%= link_to "← Atrás", login_path, class: "btn btn-outline-success btn-sm" %>
-    <%= link_to "Agregar una Meta", new_goal_path, class: "btn btn-success btn-sm" %>
-  </div>
-
-
-  <div class="position-fixed top-50 start-0 translate-middle-y">
-    <div class="bg-success text-white rounded-circle p-3 mb-3 shadow" style="cursor: pointer;" title="Inicio">
-      <i class="fa-solid fa-house"></i>
-    </div>
-    <div class="bg-success text-white rounded-circle p-3 mb-3 shadow" style="cursor: pointer;" title="Estadísticas">
-      <i class="fa-solid fa-chart-pie"></i>
-    </div>
-    <div class="bg-success text-white rounded-circle p-3 mb-3 shadow" style="cursor: pointer;" title="Configuración">
-      <i class="fa-solid fa-gear"></i>
-    </div>
+    <%= link_to "Agregar un objetivo", new_goal_path, class: "btn btn-success btn-sm" %>
   </div>
 
 
   <div class="mt-5 py-4 bg-light text-center">
     <h6 class="text-secondary">¿Necesitas ayuda para alcanzar tus metas?</h6>
     <p class="mb-4 text-muted">Consulta nuestras guías y recursos para planificar tus objetivos.</p>
-    <%= link_to "Ver recursos", "#", class: "btn btn-outline-success btn-sm" %>
-    <%= link_to "Contacto", "#", class: "btn btn-outline-dark btn-sm" %>
   </div>
 </div>
