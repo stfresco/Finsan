@@ -1,40 +1,50 @@
 <div class="container mt-5">
    <div class="text-center mb-4">
-     <h1 class="display-4 text-dark fw-bold">Tu Dashboard Financiero</h1>
-     <p class="lead text-dark">Lleva el control de tus finanzas de manera efectiva.</p>
+     <h1 class="display-4 text-success">Tu Dashboard Financiero</h1>
+     <p class="lead text-secondary">Lleva el control de tus finanzas de manera efectiva.</p>
+     <hr class="w-50 mx-auto" style="border-top: 3px solid #28a745;">
    </div>
 
    <div class="d-flex flex-column flex-lg-row gap-3">
      <div class="d-flex flex-column gap-3 w-100">
-       <div class="card text-center">
-         <div class="card-body">
-           <h5 class="card-title">Cuentas registradas</h5>
-           <h3 class="text-success">Toatal de cuentas</h3>
-           <a href="<%= accounts_path %>" class="btn btn-primary btn-sm">Gestionar Cuentas</a>
-         </div>
+      <div class="mb-4 custom-card card-rectangle hover-effect" style="background-image: url('/path/to/accounts.jpg');">
+        <div class="card-body text-center d-flex flex-column justify-content-center align-items-center" style="height: 200px;">
+          <i class="fas fa-wallet text-success mb-3" style="font-size: 2rem;"></i>
+          <h5 class="card-title text-dark font-weight-bold">Cuentas Registradas</h5>
+          <h3 class="text-success"><%= @user.accounts.count %> </h3>
+          <a href="<%= accounts_path %>" class="btn btn-success btn-sm mx-1">Gestionar Cuentas</a>
        </div>
+      </div>
 
-       <div class="card text-center">
-         <div class="card-body">
-           <h5 class="card-title">Transacciones</h5>
-           <h3 class="text-info">-</h3>
-         </div>
-       </div>
+      <div class="mb-4 custom-card card-rectangle hover-effect" style="background-image: url('/path/to/transactions.jpg');">
+        <div class="card-body text-center d-flex flex-column justify-content-center align-items-center" style="height: 200px;">
+          <i class="fas fa-exchange-alt text-success mb-3" style="font-size: 2rem;"></i>
+          <h5 class="card-title text-dark font-weight-bold">Transacciones</h5>
+          <h3 class="text-success"><%= @user.my_transactions.count %> </h3>
+        </div>
+      </div>
 
-       <div class="card text-center">
-         <div class="card-body">
-           <h5 class="card-title">Objetivos Activos</h5>
-           <h3 class="text-warning">-</h3>
-           <a href="<%= goals_path %>" class="btn btn-primary btn-sm">Gestionar Objetivos</a>
-         </div>
-       </div>
-     </div>
+      <div class="mb-4 custom-card card-rectangle hover-effect" style="background-image: url('/path/to/goals.jpg');">
+        <div class="card-body text-center d-flex flex-column justify-content-center align-items-center" style="height: 200px;">
+          <i class="fas fa-bullseye text-success mb-3" style="font-size: 2rem;"></i>
+          <h5 class="card-title text-dark font-weight-bold">Objetivos Activos</h5>
+          <h3 class="text-success"><%= @user.goals.count %> </h3>
+          <a href="<%= goals_path %>" class="btn btn-success btn-sm mx-1">Gestionar Objetivos</a>
+        </div>
+      </div>
+   </div>
+
 
      <div class="card flex-grow-1">
-       <div class="card-body">
-         <h5 class="card-title">Resumen Financiero</h5>
+       <div class="card-body text-center">
+         <h5 class="card-title text-dark font-weight-bold">Resumen Financiero</h5>
          <canvas id="financialChart" style="width:80%; height:400px;"></canvas>
        </div>
      </div>
+   </div>
+
+   <div class="mt-5 py-4 bg-light text-center">
+     <h6 class="text-secondary">¡Es hora de registrar tu último gasto!</h6>
+     <p class="mb-4 text-muted">Utiliza nuestras herramientas para organizar tu presupuesto.</p>
    </div>
 </div>
