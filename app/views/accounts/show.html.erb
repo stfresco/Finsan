@@ -1,48 +1,169 @@
 <div class="container mt-4">
-  <div class="card shadow-sm">
-    <div class="card-body">
-      <h2 class="card-title text-primary mb-4">
-        <strong>Banco:</strong> <%= @account.bank %>
-      </h2>
-      <p class="card-text mb-2">
-        <strong>Tipo de Cuenta:</strong> <%= @account.account_type %>
-      </p>
-      <p class="card-text mb-2">
-        <strong>Código de Usuario:</strong> <%= @account.user_id %>
-      </p>
-      <p class="card-text mb-2">
-        <strong>Moneda:</strong> <%= @account.currency %>
-      </p>
-      <p class="card-text mb-4">
-        <strong>Saldo Disponible:</strong>
-        <span class="text-success fw-bold">
-          <%= number_to_currency(@account.balance.total_amount, unit: "$") %>
+  <div class="card shadow-lg rounded-4 border-0">
+    <div class="card-body p-4">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="card-title text-success m-0">
+          <i class="fa-solid fa-file-invoice-dollar me-2"></i>Detalles de Cuenta
+        </h2>
+        <span class="badge bg-success rounded-pill">
+          <%= @account.bank %>
         </span>
-      </p>
+      </div>
 
-      <div class="d-flex flex-wrap gap-2">
-        <%= link_to content_tag(:i, "", class: "fa-solid fa-arrow-left me-1") + " Regresar",
-                    accounts_path,
-                    class: "btn btn-primary btn-sm d-flex align-items-center" %>
-        <%= link_to content_tag(:i, "", class: "fa-solid fa-trash me-1") + " Eliminar",
-                    account_path(@account),
-                    class: "btn btn-danger btn-sm d-flex align-items-center",
-                    data: { turbo_method: :delete, turbo_confirm: "¿Estás seguro de que deseas eliminar esta cuenta?" } %>
-        <%= link_to content_tag(:i, "", class: "fa-solid fa-pen me-1") + " Editar",
-                    edit_account_path(@account),
-                    class: "btn btn-warning btn-sm d-flex align-items-center" %>
-        <%= link_to content_tag(:i, "", class: "fa-solid fa-plus me-1") + " Agregar Transacción",
-                    new_account_my_transaction_path(@account),
-                    class: "btn btn-success btn-sm d-flex align-items-center" %>
-        <%= link_to content_tag(:i, "", class: "fa-solid fa-list me-1") + " Ver Transacciones",
-                    account_my_transactions_path(@account),
-                    class: "btn btn-info btn-sm d-flex align-items-center",
-                    data: { turbo_frame: :transaction } %>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="bg-light p-3 rounded-3">
+            <small class="text-muted d-block mb-1">Tipo de Cuenta</small>
+            <p class="fw-bold mb-0"><%= @account.account_type %></p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="bg-light p-3 rounded-3">
+            <small class="text-muted d-block mb-1">Código de Usuario</small>
+            <p class="fw-bold mb-0"><%= @account.user_id %></p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="bg-light p-3 rounded-3">
+            <small class="text-muted d-block mb-1">Moneda</small>
+            <p class="fw-bold mb-0"><%= @account.currency %></p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="bg-light p-3 rounded-3">
+            <small class="text-muted d-block mb-1">Saldo Disponible</small>
+            <p class="text-success fw-bold fs-4 mb-0">
+              <%= number_to_currency(@account.balance.total_amount, unit: "$") %>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4 text-muted">
+
+      <div class="d-flex flex-wrap gap-2 justify-content-center">
+        <%= link_to accounts_path,
+            class: "btn btn-outline-primary d-flex align-items-center",
+            data: { bs_toggle: "tooltip" },
+            title: "Regresar a Cuentas" do %>
+          <i class="fa-solid fa-arrow-left me-2"></i>
+        <% end %>
+        <%= link_to account_path(@account),
+            class: "btn btn-outline-danger d-flex align-items-center",
+            data: {
+              turbo_method: :delete,
+              turbo_confirm: "¿Estás seguro de que deseas eliminar esta cuenta?",
+              bs_toggle: "tooltip"
+            },
+            title: "Eliminar Cuenta" do %>
+          <i class="fa-solid fa-trash me-2"></i>
+        <% end %>
+
+        <%= link_to edit_account_path(@account),
+            class: "btn btn-outline-secondary d-flex align-items-center",
+            data: { bs_toggle: "tooltip" },
+            title: "Editar Cuenta" do %>
+          <i class="fa-solid fa-pen me-2"></i>
+        <% end %>
+
+        <%= link_to new_account_my_transaction_path(@account),
+            class: "btn btn-outline-success d-flex align-items-center",
+            data: { bs_toggle: "tooltip" },
+            title: "Agregar Transacción" do %>
+          <i class="fa-solid fa-plus me-2"></i>Agregar Transacción
+        <% end %>
+
+        <%= link_to "#",
+          class: "btn btn-outline-info d-flex align-items-center",
+          data: {
+          controller: "mytransactions",
+          action: "click->mytransactions#displayTransactions",
+          bs_toggle: "tooltip"
+         },
+        title: "Ver Transacciones" do %>
+        <i class="fa-solid fa-list me-2"></i>Ver Transacciones
+        <% end %>
       </div>
     </div>
   </div>
 
-  <div class="mt-4">
-    <%= turbo_frame_tag :transaction %>
+
+</div>
+
+<div class="container mt-4">
+  <div class="content-with-navbar-spacing mytransactions d-none">
+    <div class="card shadow-lg rounded-4 border-0">
+      <div class="card-body p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="card-title text-success m-0">
+            <i class="fa-solid fa-list me-2"></i>Transacciones
+          </h2>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Categoría</th>
+                <th scope="col">Monto</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Tipo de Transacción</th>
+                <th class="text-muted text-center">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @transactions.each do |t| %>
+                <tr>
+                  <td><%= t.category %></td>
+                  <td>
+                    <span class="<%= t.mytransaction_type == 'Ingreso' ? 'text-success' : 'text-danger' %> fw-bold">
+                      <%= number_to_currency(t.amount, unit: "$") %>
+                    </span>
+                  </td>
+                  <td><%= t.date %></td>
+                  <td>
+                    <span class="badge <%= t.mytransaction_type == 'Ingreso' ? 'bg-success' : 'bg-danger' %> rounded-pill">
+                      <%= t.mytransaction_type %>
+                    </span>
+                  </td>
+                  <td class="text-center">
+                    <div class="btn-group" role="group">
+                      <%= link_to edit_my_transaction_path(account_id: t.account_id, id: t.id),
+                          class: "btn btn-sm btn-outline-secondary",
+                          data: { bs_toggle: "tooltip" },
+                          title: "Editar" do %>
+                        <i class="fas fa-pencil-alt"></i>
+                      <% end %>
+                      <%= link_to my_transaction_path(account_id: t.account_id, id: t.id),
+                          class: "btn btn-sm btn-outline-danger",
+                          data: {
+                            turbo_method: :delete,
+                            turbo_confirm: "¿Estás seguro de que deseas eliminar esta transacción?",
+                            bs_toggle: "tooltip"
+                          },
+                          title: "Eliminar" do %>
+                        <i class="fas fa-trash"></i>
+                      <% end %>
+                      <%= link_to my_transaction_path(account_id: t.account_id, id: t.id),
+                          class: "btn btn-sm btn-outline-info",
+                          data: { bs_toggle: "tooltip" },
+                          title: "Ver Detalles" do %>
+                        <i class="fas fa-eye"></i>
+                      <% end %>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <% if @transactions.empty? %>
+          <div class="alert alert-info text-center" role="alert">
+            No hay transacciones registradas
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

@@ -1,32 +1,6 @@
-<<<<<<< HEAD
 
-   <div class="text-center mb-4">
-     <h1 class="display-4">Tus objetivos! 😎</h1>
-     <p class="lead"></p>
-   </div>
-   <div class="row">
-    <%@goals.each do |g|%>
-
-       <div class="col-md-2 ">
-      <div class="card text-center">
-        <div class="card-body m-2">
-          <h5 class="card-title"><%=g.title%></h5>
-          <h3 class="text-success"></h3>
-          <%= link_to "Ver mas", goal_path(g), class: "btn btn-primary btn-sm"  %>
-          <%= link_to "Editar", edit_goal_path(g), class: "btn btn-secondary btn-sm"  %>
-
-
-        </div>
-      </div>
-    </div>
-    <%end%>
-  </div>
-
-<a href="<%= new_goal_path %>" class="btn btn-orange btn-sm">Agregar una Meta</a>
-<a href="<%= home_path %>" class="btn btn-success btn-sm"> Dashboard</a>
-=======
 <div class="container my-5 position-relative">
-  
+
   <div class="text-center mb-4">
     <h1 class="display-4 text-success">¡Tus objetivos! <i class="fa-solid fa-chart-line"></i></h1>
     <p class="lead text-secondary">Administra y alcanza tus metas fácilmente</p>
@@ -75,4 +49,3 @@
     <%= link_to "Contacto", "#", class: "btn btn-outline-dark btn-sm" %>
   </div>
 </div>
->>>>>>> 5cf95ec2b177c8ac147fdf5fb952d85c143959a2
