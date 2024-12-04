@@ -10,6 +10,8 @@
 
   <%= simple_form_for [@account, @transaction] do |c| %>
     <div class="mb-3">
+
+
       <%= c.input :mytransaction_type,
                   as: :select,
                   collection: ["Ingreso", "Egreso"],
@@ -99,7 +101,6 @@
     </div>
   <% end %>
 </div>
-
 
 
 
