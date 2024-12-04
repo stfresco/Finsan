@@ -5,6 +5,7 @@ class AccountsController < ApplicationController
   end
 
   def show
+    @transactions = @account.my_transactions
   end
 
   def new

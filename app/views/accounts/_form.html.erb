@@ -5,15 +5,18 @@
 
   <%= simple_form_for(account, html: { class: "needs-validation", novalidate: true }) do |f| %>
     <div class="mb-3">
-      <%= f.label :bank, "Banco:", class: "form-label fw-bold" %>
-      <%= f.input :bank, input_html: {
-                  class: "form-control",
-                  data: {
-                  controller: "capitalize",
-                  capitalize_target: "bank",
-                  action: "keyup->capitalize#capitalize"
-          }
-        } %>
+     <%= f.input :bank,
+            label: "Banco:",
+            label_html: { class: "form-label fw-bold" },
+            input_html: {
+              class: "form-control",
+              data: {
+                controller: "capitalize",
+                capitalize_target: "bank",
+                action: "keyup->capitalize#capitalize"
+              }
+            },
+            required: false %>
     </div>
 
     <div class="mb-3">
@@ -23,12 +26,14 @@
                   as: :select,
                   collection: ["Credito", "Debito"],
                   include_blank: "Selecciona tipo de cuenta",
-                  input_html: { class: "form-select" } %>
+                  input_html: { class: "form-select" },
+                  required: false %>
     </div>
 
     <div class="mb-3">
       <%= f.input :currency,
                   label: "Divisa:",
+                  label_html: { class: "form-label fw-bold" },
                   as: :select,
                   collection: [
                     "USD - Dólar estadounidense", "EUR - Euro", "PY - Yen japonés",
@@ -47,11 +52,20 @@
                     "EGP - Libra egipcia", "VND - Dong vietnamita"
                   ],
                   include_blank: "Selecciona una moneda",
-                  input_html: { class: "form-select" } %>
+                  input_html: { class: "form-select" },
+                  required: false %>
     </div>
 
-    <div class="d-grid">
-      <%= f.submit account.persisted? ? "Actualizar cuenta" : "Crear cuenta", class: "btn btn-primary fw-bold" %>
+    <div class="mb-3">
+      <%= f.submit account.persisted? ? "Actualizar cuenta" : "Crear cuenta", class: "btn btn-success w-100" %>
+    </div>
+
+    <div class="text-center mt-3">
+           <%= link_to "Cancelar",
+            account.persisted? ? account_path(account) : accounts_path,
+            class: "text-muted small text-decoration-none",
+            data: { bs_toggle: "tooltip" },
+            title: account.persisted? ? "Volver al detalle de la cuenta" : "Volver a la lista de cuentas" %>
     </div>
   <% end %>
 </div>

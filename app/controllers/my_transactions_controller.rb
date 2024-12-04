@@ -39,6 +39,7 @@ class MyTransactionsController < ApplicationController
 
   def show
     @transaction = MyTransaction.find(params[:id])
+    @account = @transaction.account
   end
 
   def edit
