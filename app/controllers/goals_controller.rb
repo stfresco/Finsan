@@ -20,6 +20,7 @@ class GoalsController < ApplicationController
 
   def show
     @goal = Goal.find(params[:id])
+    @accounts = current_user.accounts
   end
 
   def edit
@@ -42,7 +43,46 @@ class GoalsController < ApplicationController
       end
   end
 
+  def my_transaction
+    @transaction = MyTransaction.new
+    @account = Account.find(params[:account])
+  end
+
+  def create_goal_transaction
+    # Primero, encuentra la cuenta
+    @account = Account.find(params[:account])
+
+    # Extrae los parámetros de la transacción
+    transaction_params = params[:my_transaction]
+
+    @transaction = MyTransaction.new(
+      account: @account,
+      category: transaction_params[:category],
+      amount: transaction_params[:amount],
+      date: transaction_params[:date],
+      method: transaction_params[:method],
+      description: transaction_params[:description],
+      mytransaction_type: transaction_params[:mytransaction_type],
+      goal_id: transaction_params[:goal]
+    )
+    # @transaction = MyTransaction.new(transaction_params.merge(account: @account))
+
+    # Intenta guardar la transacción
+    if @transaction.save
+      redirect_to goal_path(transaction_params[:goal]),
+        notice: "Estás más cerca de tu objetivo"
+    else
+
+      # Manejo de errores si la transacción no se puede guardar
+      render "goals/my_transaction"
+    end
+  end
+
   private
+
+  # def transaction_params
+  #   params.require(:my_transaction).permit(:category, :amount, :date, :description, :method, :mytransaction_type, :goal)
+  # end
 
   def goal_params
     params.require(:goal).permit(:title, :description, :status, :start_date, :finish_date, :amount)

@@ -10,6 +10,8 @@
 
   <%= simple_form_for [@account, @transaction] do |c| %>
     <div class="mb-3">
+
+
       <%= c.input :mytransaction_type,
                   as: :select,
                   collection: ["Ingreso", "Egreso"],
@@ -100,28 +102,3 @@
   <% end %>
 </div>
 
-
-
-
-<%# <script>
-  const selector = document.querySelector("select")
-  const balance = parseFloat(document.getElementById("balance").innerText)
-  const amount = document.querySelector("#my_transaction_amount")
-  selector.addEventListener("change", () => {
-    if (balance === 0.0) {
-      document.querySelector('input[name="commit"]').disabled = true
-      alert("Tu saldo está en cero, no puedes hacer egresos")
-    }
-  })
-  amount.addEventListener("keyup", () => {
-    const submitButton = document.querySelector('input[name="commit"]');
-    if (parseFloat(amount.value) > balance) {
-      amount.style.color = "red"; // Cambiar color del monto
-      submitButton.disabled = true; // Deshabilitar el botón
-      alert("Tu saldo es menor a tus egresos, no puedes hacer egresos");
-    } else {
-      amount.style.color = ""; // Restaurar el color original
-      submitButton.disabled = false; // Habilitar el botón si la condición es válida
-    }
-  });
-</script> %>

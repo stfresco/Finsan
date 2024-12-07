@@ -6,26 +6,32 @@
     <hr class="w-50 mx-auto" style="border-top: 3px solid #28a745;">
   </div>
 
-  <div class="row justify-content-center">
-    <% @accounts.each do |account| %>
-      <div class="col-md-4 col-sm-6 mb-4">
-        <div class="card shadow-lg h-100 border-0">
-          <div class="card-body text-center">
-            <i class="fa-solid fa-file-invoice-dollar text-info mb-3" style="font-size: 2rem;"></i>
-            <h5 class="card-title text-dark font-weight-bold"><%= account.bank %></h5>
-            <h6 class="card-subtitle text-muted mb-3">
-              <%= account.account_type.capitalize %>
-            </h6>
-            <p class="text-success fs-5 fw-bold mb-4">
-              <%= number_to_currency(account.balance.total_amount, unit: "$") %>
-            </p>
-            <%= link_to "Detalles", account_path(account), class: "btn btn-success btn-sm mx-1" %>
-            <%= link_to "Editar", edit_account_path(account), class: "btn btn-outline-dark btn-sm mx-1" %>
-          </div>
+<div class="row justify-content-center">
+  <% @accounts.each do |account| %>
+    <div
+      class="col-md-4 col-sm-6 mb-4"
+      data-controller="currency-symbol"
+      data-currency="<%= account.currency %>"
+    >
+      <div class="card shadow-lg h-100 border-0">
+        <div class="card-body text-center">
+          <i class="fa-solid fa-file-invoice-dollar text-info mb-3" style="font-size: 2rem;"></i>
+          <h5 class="card-title text-dark font-weight-bold"><%= account.bank %></h5>
+          <h6 class="card-subtitle text-muted mb-3">
+            <%= account.account_type.capitalize %>
+          </h6>
+          <p class="text-success fs-5 fw-bold mb-4">
+            <span data-controller="currency-symbol" data-currency="<%= account.currency %>">
+              <%= account.balance.total_amount %>
+            </span>
+          </p>
+          <%= link_to "Detalles", account_path(account), class: "btn btn-success btn-sm mx-1" %>
+          <%= link_to "Editar", edit_account_path(account), class: "btn btn-outline-dark btn-sm mx-1" %>
         </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
+</div>
 
   <div class="d-flex justify-content-between align-items-center mt-5">
     <%= link_to "← Atrás", login_path, class: "btn btn-outline-success btn-sm" %>
@@ -36,7 +42,5 @@
   <div class="mt-5 py-4 bg-light text-center">
     <h6 class="text-secondary">¿Necesitas ayuda para gestionar tus cuentas?</h6>
     <p class="mb-4 text-muted">Consulta nuestras guías y recursos para administrar tus finanzas.</p>
-    <%= link_to "Ver recursos", "#", class: "btn btn-outline-success btn-sm" %>
-    <%= link_to "Contacto", "#", class: "btn btn-outline-dark btn-sm" %>
   </div>
 </div>

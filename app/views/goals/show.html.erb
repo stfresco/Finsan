@@ -25,17 +25,36 @@
     </div>
   </div>
 
+  <div class="goal-details-container" style="display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
 
-  <div class="goal-transactions-chart" style="margin: 20px auto; max-width: 600px; padding: 20px; background-color: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
-    <h3 style="color: #00c897;">Transacciones Relacionadas</h3>
-    <canvas id="transactionsDetailsChart" width="400" height="200"></canvas>
-    <p style="margin-top: 20px; color: #00c897; text-align: center;"><strong>Total de Transacciones:</strong> <%= @goal.my_transactions.sum(:amount) %></p>
+    <div class="goal-transactions" style="margin: 20px auto; max-width: 600px; padding: 20px; background-color: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+      <h3 style="color: #00c897;">Transacciones Relacionadas</h3>
+      <ul style="list-style: none; padding: 0;">
+         <% sum = 0 %>
+        <% @goal.my_transactions.each do |transaction| %>
+        <li style="margin: 10px 0; padding: 10px; border-bottom: 1px solid #eee;">
+          <p><strong style="color: #00c897;">Cantidad:</strong> <%= transaction.amount %></p>
+          <p><strong style="color: #00c897;">Fecha:</strong> <%= transaction.date %></p>
+          <p><strong style="color: #00c897;">Banco:</strong> <%= transaction.account.bank %></p>
+          <% sum += transaction.amount %>
+        </li>
+      <% end %>
+    </ul>
+    <p><strong style="color: #00c897;">Total Ahorrado:</strong> <%= sum %></p>
+    <p><strong style="color: #00c897;">Restante:</strong> <%= @goal.amount ? [@goal.amount - sum, 0].max : "Monto no definido" %></p>
   </div>
 
-
+  <div class="account-transactions" style="margin: 20px auto; max-width: 600px; padding: 20px; background-color: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+    <h3 style="color: #00c897;">Selecciona una cuenta</h3>
+    <% @accounts.each do |account| %>
+      <%= link_to account.bank, goals_my_transaction_path(account: account, goal: @goal) %>
+    <% end %>
+  </div>
+  
+  </div>
   <div class="goal-actions" style="text-align: center; margin-top: 20px;">
-    <%= link_to "Registrar una transacción", my_transaction_path(goal_id: @goal.id), class: "btn btn-add", style: "background-color: #00c897; color: white; font-weight: bold; padding: 10px 20px; border-radius: 5px; border: none; text-decoration: none; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);" %>
-    <%= link_to "Eliminar Meta", goal_path(@goal), method: :delete, data: { confirm: "¿Estás seguro de que deseas eliminar esta meta?" }, class: "btn btn-danger", style: "margin-left: 10px; background-color: #ff6b6b; border: none; padding: 10px 20px; color: white; border-radius: 5px; text-decoration: none;" %>
+    <%#= link_to "Registrar una transacción", accounts_path, class: "btn btn-add", style: "background-color: #00c897; color: white; font-weight: bold; padding: 10px 20px; border-radius: 5px; border: none; text-decoration: none; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);" %>
+    <%= link_to "Eliminar Meta", goal_path(@goal), method: :delete, data: { turbo_method: :delete }, class: "btn btn-danger", style: "margin-left: 10px; background-color: #ff6b6b; border: none; padding: 10px 20px; color: white; border-radius: 5px; text-decoration: none;" %>
   </div>
 
 
@@ -46,89 +65,14 @@
 </div>
 
 <script>
-
-  function renderTransactionsChart() {
-    const transactionsCanvas = document.getElementById("transactionsDetailsChart");
-
-
-    if (!transactionsCanvas) {
-      console.error("Canvas para transacciones no encontrado.");
-      return;
-    }
-
-    const transactionsCtx = transactionsCanvas.getContext("2d");
-
-    const transactions = <%= @goal.my_transactions.map { |t| { amount: t.amount, date: t.date.strftime('%d/%m/%Y'), bank: t.account.bank } }.to_json.html_safe %>;
-
-
-    if (transactions.length === 0) {
-      console.warn("No hay datos de transacciones para mostrar en el gráfico.");
-      return;
-    }
-
-    const transactionLabels = transactions.map(t => `${t.date} - ${t.bank}`);
-    const transactionAmounts = transactions.map(t => t.amount);
-
-
-    if (window.transactionsChart) {
-      window.transactionsChart.destroy();
-    }
-
-
-    window.transactionsChart = new Chart(transactionsCtx, {
-      type: "bar",
-      data: {
-        labels: transactionLabels,
-        datasets: [{
-          label: "Transacciones",
-          data: transactionAmounts,
-          backgroundColor: "rgba(0, 200, 151, 0.8)",
-          borderColor: "rgba(0, 165, 125, 1)",
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: true,
-            position: "top"
-          },
-          tooltip: {
-            callbacks: {
-              label: function(tooltipItem) {
-                const transaction = transactions[tooltipItem.dataIndex];
-                return `Banco: ${transaction.bank}, Monto: ${transaction.amount}`;
-              }
-            }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-  }
-
-
-  function renderProgressChart() {
-    const progressCanvas = document.getElementById("goalProgressBarChart");
-
-
-    if (!progressCanvas) {
-      console.error("Canvas para progreso no encontrado.");
-      return;
-    }
-
-    const progressCtx = progressCanvas.getContext("2d");
-
+  document.addEventListener("turbo:load", function () {
+    const ctx = document.getElementById("goalProgressBarChart").getContext("2d");
     const total = <%= @goal.amount || 0 %>;
-    const saved = <%= @goal.my_transactions.sum(:amount) %>;
+    const saved = <%= sum %>;
     const remaining = Math.max(total - saved, 0);
 
-    new Chart(progressCtx, {
+
+    new Chart(ctx, {
       type: "bar",
       data: {
         labels: ["Ahorrado", "Restante"],
@@ -155,11 +99,5 @@
         }
       }
     });
-  }
-
-  
-  document.addEventListener("turbo:load", function () {
-    renderProgressChart();
-    renderTransactionsChart();
   });
 </script>

@@ -14,10 +14,10 @@ puts "Eliminando MilestoneTransaction"
 MilestoneTransaction.destroy_all
 puts "Milestone"
 Milestone.destroy_all
-puts "Eliminando goal"
-Goal.destroy_all
 puts "Eliminando Mytransaction"
 MyTransaction.destroy_all
+puts "Eliminando goal"
+Goal.destroy_all
 puts "Eliminando Balance"
 Balance.destroy_all
 puts "Eliminando Account"
@@ -45,28 +45,39 @@ account1 = Account.create!(
   currency: "USD"
 )
 
-Balance.create!(
+# Balance.create!(
+#   account_id: account1.id,
+#   total_amount: 1000,
+#   status: "active"
+# )
+mytransaction0 = MyTransaction.create!(
+  category: "Sueldo",
+  amount: 3000,
+  date: Date.today,
+  method: "Credit Card",
+  description: "Sueldo del mes",
   account_id: account1.id,
-  total_amount: 1000,
-  status: "active"
+  mytransaction_type: "Ingreso"
 )
 
 mytransaction1 = MyTransaction.create!(
   category: "Groceries",
-  amount: 150,
+  amount: 2300,
   date: Date.today,
   method: "Credit Card",
   description: "Compra de alimentos",
-  account_id: account1.id
+  account_id: account1.id,
+  mytransaction_type: "Egreso"
 )
 
 mytransaction2 = MyTransaction.create!(
   category: "Rent",
-  amount: 800,
+  amount: 300,
   date: Date.today - 5,
   method: "Bank Transfer",
   description: "Pago de alquiler",
-  account_id: account1.id
+  account_id: account1.id,
+  mytransaction_type: "Egreso"
 )
 
 goal1 = Goal.create!(
@@ -74,24 +85,23 @@ goal1 = Goal.create!(
   description: "Ahorrar para un viaje de vacaciones",
   status: "in_progress",
   start_date: Date.today,
-  amount: 1000,
   finish_date: Date.today + 6.months,
   amount: 10_000,
   user_id: user1.id
 )
 
-milestone1 = Milestone.create!(
-  goal_id: goal1.id,
-  amount: 500
-)
+# milestone1 = Milestone.create!(
+#   goal_id: goal1.id,
+#   amount: 500
+# )
 
 
-MilestoneTransaction.create!(
-  milestone_id: milestone1.id,
-  my_transaction_id: mytransaction1.id
-)
+# MilestoneTransaction.create!(
+#   milestone_id: milestone1.id,
+#   my_transaction_id: mytransaction1.id
+# )
 
-MilestoneTransaction.create!(
-  milestone_id: milestone1.id,
-  my_transaction_id: mytransaction2.id
-)
+# MilestoneTransaction.create!(
+#   milestone_id: milestone1.id,
+#   my_transaction_id: mytransaction2.id
+# )
