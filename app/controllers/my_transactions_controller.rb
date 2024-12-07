@@ -28,9 +28,9 @@ class MyTransactionsController < ApplicationController
       if params[:my_transaction][:goal_id].nil?
         redirect_to account_my_transactions_path(@account), notice: "You have made a new transaction!"
       else
-        redirect_to goal_path(params[:my_transaction][:goal_id].to_i), notice: "Estas más cerca de tu obj"
+        #redirect_to goal_path(params[:my_transaction][:goal_id].to_i), notice: "Estas más cerca de tu obj"
+        redirect_to account_path(@account)
       end
-
 
     else
       render :new, status: :unprocessable_entity
@@ -61,6 +61,7 @@ class MyTransactionsController < ApplicationController
   def destroy
     @transaction = MyTransaction.find(params[:id])
     @account = Account.find(params[:account_id])
+
 
     if @transaction.destroy
       if request.referer&.include?('all_transactions')

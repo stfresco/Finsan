@@ -2,7 +2,7 @@ class CreateTransactions < ActiveRecord::Migration[7.2]
   def change
     create_table :transactions do |t|
       t.string :category
-      t.decimal :amount
+      t.float :amount
       t.date :date
       t.string :method
       t.text :description

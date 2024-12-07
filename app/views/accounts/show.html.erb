@@ -10,7 +10,7 @@
         </span>
       </div>
 
-      <div class="row g-3">
+      <div class="row g-3" >
         <div class="col-md-6">
           <div class="bg-light p-3 rounded-3">
             <small class="text-muted d-block mb-1">Tipo de Cuenta</small>
@@ -29,16 +29,18 @@
             <p class="fw-bold mb-0"><%= @account.currency %></p>
           </div>
         </div>
+
         <div class="col-md-6">
-          <div class="bg-light p-3 rounded-3">
-            <small class="text-muted d-block mb-1">Saldo Disponible</small>
-            <p class="text-success fw-bold fs-4 mb-0">
-              <%= number_to_currency(@account.balance.total_amount, unit: "$") %>
-            </p>
+          <div class="bg-light p-3 rounded-3" >
+          <small class="text-muted d-block mb-1">Saldo Disponible</small>
+          <p class="text-success fw-bold fs-4 mb-0">
+          <span data-controller="currency-symbol" data-currency="<%= @account.currency %>">
+            <%= @account.balance.total_amount %>
+          </span>
+          </p>
           </div>
         </div>
       </div>
-
       <hr class="my-4 text-muted">
 
       <div class="d-flex flex-wrap gap-2 justify-content-center">

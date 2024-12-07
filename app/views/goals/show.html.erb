@@ -25,12 +25,13 @@
     </div>
   </div>
 
+  <div class="goal-details-container" style="display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
 
-  <div class="goal-transactions" style="margin: 20px auto; max-width: 600px; padding: 20px; background-color: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
-    <h3 style="color: #00c897;">Transacciones Relacionadas</h3>
-    <ul style="list-style: none; padding: 0;">
-      <% sum = 0 %>
-      <% @goal.my_transactions.each do |transaction| %>
+    <div class="goal-transactions" style="margin: 20px auto; max-width: 600px; padding: 20px; background-color: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+      <h3 style="color: #00c897;">Transacciones Relacionadas</h3>
+      <ul style="list-style: none; padding: 0;">
+         <% sum = 0 %>
+        <% @goal.my_transactions.each do |transaction| %>
         <li style="margin: 10px 0; padding: 10px; border-bottom: 1px solid #eee;">
           <p><strong style="color: #00c897;">Cantidad:</strong> <%= transaction.amount %></p>
           <p><strong style="color: #00c897;">Fecha:</strong> <%= transaction.date %></p>
@@ -43,9 +44,16 @@
     <p><strong style="color: #00c897;">Restante:</strong> <%= @goal.amount ? [@goal.amount - sum, 0].max : "Monto no definido" %></p>
   </div>
 
-
+  <div class="account-transactions" style="margin: 20px auto; max-width: 600px; padding: 20px; background-color: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+    <h3 style="color: #00c897;">Selecciona una cuenta</h3>
+    <% @accounts.each do |account| %>
+      <%= link_to account.bank, goals_my_transaction_path(account: account, goal: @goal) %>
+    <% end %>
+  </div>
+  
+  </div>
   <div class="goal-actions" style="text-align: center; margin-top: 20px;">
-    <%= link_to "Registrar una transacción", accounts_path, class: "btn btn-add", style: "background-color: #00c897; color: white; font-weight: bold; padding: 10px 20px; border-radius: 5px; border: none; text-decoration: none; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);" %>
+    <%#= link_to "Registrar una transacción", accounts_path, class: "btn btn-add", style: "background-color: #00c897; color: white; font-weight: bold; padding: 10px 20px; border-radius: 5px; border: none; text-decoration: none; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);" %>
     <%= link_to "Eliminar Meta", goal_path(@goal), method: :delete, data: { turbo_method: :delete }, class: "btn btn-danger", style: "margin-left: 10px; background-color: #ff6b6b; border: none; padding: 10px 20px; color: white; border-radius: 5px; text-decoration: none;" %>
   </div>
 

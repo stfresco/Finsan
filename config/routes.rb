@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'dashboard#index', as: :dashboard
   get '/home', to: 'home#index', as: 'home'
   get '/login', to: 'home#login', as: 'login'
+  get "goals/my_transaction", to: "goals#my_transaction"
+  post "create_goal_transaction", to: "goals#create_goal_transaction"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
