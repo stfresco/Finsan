@@ -25,38 +25,55 @@
     </div>
   </div>
 
-  <div class="goal-details-container" style="display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
-
-    <div class="goal-transactions" style="margin: 20px auto; max-width: 600px; padding: 20px; background-color: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
-      <h3 style="color: #00c897;">Transacciones Relacionadas</h3>
-      <ul style="list-style: none; padding: 0;">
-         <% sum = 0 %>
+  <div class="goal-transactions" style="margin: 20px auto; max-width: 100%; padding: 20px; background-color: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+    <h3 style="color: #00c897; text-align: center;">Transacciones Relacionadas</h3>
+    <table style="width: 100%; border-collapse: collapse; text-align: center;">
+      <thead style="background-color: #f5f5f5; color: #00c897;">
+        <tr>
+          <th style="padding: 10px; border: 1px solid #ddd;">Categoría</th>
+          <th style="padding: 10px; border: 1px solid #ddd;">Monto</th>
+          <th style="padding: 10px; border: 1px solid #ddd;">Fecha</th>
+          <th style="padding: 10px; border: 1px solid #ddd;">Tipo</th>
+          <th style="padding: 10px; border: 1px solid #ddd;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
         <% @goal.my_transactions.each do |transaction| %>
-        <li style="margin: 10px 0; padding: 10px; border-bottom: 1px solid #eee;">
-          <p><strong style="color: #00c897;">Cantidad:</strong> <%= transaction.amount %></p>
-          <p><strong style="color: #00c897;">Fecha:</strong> <%= transaction.date %></p>
-          <p><strong style="color: #00c897;">Banco:</strong> <%= transaction.account.bank %></p>
-          <% sum += transaction.amount %>
-        </li>
-      <% end %>
-    </ul>
-    <p><strong style="color: #00c897;">Total Ahorrado:</strong> <%= sum %></p>
-    <p><strong style="color: #00c897;">Restante:</strong> <%= @goal.amount ? [@goal.amount - sum, 0].max : "Monto no definido" %></p>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #ddd;"><%= transaction.category %></td>
+            <td style="padding: 10px; border: 1px solid #ddd; color: <%= transaction.amount.negative? ? 'red' : 'green' %>;">
+              <%= number_to_currency(transaction.amount) %>
+            </td>
+            <td style="padding: 10px; border: 1px solid #ddd;"><%= transaction.date %></td>
+            <td style="padding: 10px; border: 1px solid #ddd; color: <%= transaction.amount.negative? ? 'red' : '#00c897' %>;">
+              <%= transaction.amount.negative? ? 'Egreso' : 'Ingreso' %>
+            </td>
+            <td style="padding: 10px; border: 1px solid #ddd;">
+              <%= link_to 'Editar', edit_my_transaction_path(transaction), class: 'btn', style: 'color: #00c897; text-decoration: none;' %> |
+              <%= link_to 'Eliminar', my_transaction_path(transaction), method: :delete, data: { confirm: '¿Seguro?' }, class: 'btn', style: 'color: red; text-decoration: none;' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 
   <div class="account-transactions" style="margin: 20px auto; max-width: 600px; padding: 20px; background-color: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
-    <h3 style="color: #00c897;">Selecciona una cuenta</h3>
-    <% @accounts.each do |account| %>
-      <%= link_to account.bank, goals_my_transaction_path(account: account, goal: @goal) %>
-    <% end %>
-  </div>
-  
-  </div>
-  <div class="goal-actions" style="text-align: center; margin-top: 20px;">
-    <%#= link_to "Registrar una transacción", accounts_path, class: "btn btn-add", style: "background-color: #00c897; color: white; font-weight: bold; padding: 10px 20px; border-radius: 5px; border: none; text-decoration: none; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);" %>
-    <%= link_to "Eliminar Meta", goal_path(@goal), method: :delete, data: { turbo_method: :delete }, class: "btn btn-danger", style: "margin-left: 10px; background-color: #ff6b6b; border: none; padding: 10px 20px; color: white; border-radius: 5px; text-decoration: none;" %>
+    <h3 style="color: #00c897; text-align: center;">Registrar una transacción</h3>
+    <p style="text-align: center; color: #7a7a7a; margin-bottom: 20px;">Elige una cuenta</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+      <% @accounts.each do |account| %>
+        <div style="flex: 1; min-width: 120px; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+          <p style="color: #00c897; font-weight: bold;"><%= account.bank %></p>
+          <%= link_to 'Seleccionar', goals_my_transaction_path(account: account, goal: @goal), class: 'btn', style: 'background-color: #00c897; color: white; padding: 5px 10px; border-radius: 5px; text-decoration: none;' %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
+  <div class="goal-actions" style="text-align: center; margin-top: 20px;">
+    <%= link_to "Eliminar Meta", goal_path(@goal), method: :delete, data: { turbo_method: :delete, confirm: "¿Estás seguro de que deseas eliminar esta meta?" }, class: "btn btn-danger", style: "background-color: #ff6b6b; color: white; font-weight: bold; padding: 10px 20px; border-radius: 5px; text-decoration: none; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);" %>
+  </div>
 
   <div class="goal-tips" style="margin-top: 30px; text-align: center; color: #7a7a7a;">
     <p>¿Necesitas ayuda para alcanzar tus metas?</p>
@@ -68,14 +85,15 @@
   document.addEventListener("turbo:load", function () {
     const ctx = document.getElementById("goalProgressBarChart").getContext("2d");
     const total = <%= @goal.amount || 0 %>;
-    const saved = <%= sum %>;
+    const saved = <%= @goal.my_transactions.sum(:amount) %>;
     const remaining = Math.max(total - saved, 0);
 
+    const labelText = remaining === 0 ? "Completado" : "Restante";
 
     new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["Ahorrado", "Restante"],
+        labels: ["Ahorrado", labelText],
         datasets: [{
           label: "Progreso del Objetivo",
           data: [saved, remaining],
