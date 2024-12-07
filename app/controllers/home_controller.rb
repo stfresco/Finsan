@@ -5,6 +5,9 @@ class HomeController < ApplicationController
   end
 
   def index
+    @user = current_user
+    @accounts = current_user.accounts
+    @goals = current_user.goals
   end
 
   def login
