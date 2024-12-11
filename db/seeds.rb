@@ -9,7 +9,6 @@
 #   end
 # Reseteamos las secuencias a 1
 
-
 puts "Eliminando MilestoneTransaction"
 MilestoneTransaction.destroy_all
 puts "Milestone"
@@ -50,7 +49,7 @@ account1 = Account.create!(
 #   total_amount: 1000,
 #   status: "active"
 # )
-mytransaction0 = MyTransaction.create!(
+mytransaction1 = MyTransaction.create!(
   category: "Sueldo",
   amount: 3000,
   date: Date.today,
@@ -60,7 +59,7 @@ mytransaction0 = MyTransaction.create!(
   mytransaction_type: "Ingreso"
 )
 
-mytransaction1 = MyTransaction.create!(
+mytransaction2 = MyTransaction.create!(
   category: "Groceries",
   amount: 2300,
   date: Date.today,
@@ -70,7 +69,7 @@ mytransaction1 = MyTransaction.create!(
   mytransaction_type: "Egreso"
 )
 
-mytransaction2 = MyTransaction.create!(
+mytransaction3 = MyTransaction.create!(
   category: "Rent",
   amount: 300,
   date: Date.today - 5,
@@ -94,7 +93,6 @@ goal1 = Goal.create!(
 #   goal_id: goal1.id,
 #   amount: 500
 # )
-
 
 # MilestoneTransaction.create!(
 #   milestone_id: milestone1.id,

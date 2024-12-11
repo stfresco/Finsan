@@ -22,7 +22,7 @@
           </h6>
           <p class="text-success fs-5 fw-bold mb-4">
             <span data-controller="currency-symbol" data-currency="<%= account.currency %>">
-              <%= account.balance.total_amount %>
+              <%= number_to_currency(account.balance.total_amount, unit: "", delimiter: ",") %>
             </span>
           </p>
           <%= link_to "Detalles", account_path(account), class: "btn btn-success btn-sm mx-1" %>

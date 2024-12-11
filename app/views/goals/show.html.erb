@@ -12,10 +12,10 @@
 
     <div class="goal-details" style="flex: 1; padding: 20px; background-color: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
       <p><strong style="color: #00c897;">Descripción:</strong> <%= @goal.description %></p>
-      <p><strong style="color: #00c897;">Monto:</strong> <%= @goal.amount || "Monto no definido" %></p>
+      <p><strong style="color: #00c897;">Monto:</strong> <%= number_to_currency(@goal.amount, unit: "", delimiter: ",") || "Monto no definido" %></p>
       <p><strong style="color: #00c897;">Estado:</strong> <%= @goal.status == "in_progress" ? "Activo" : @goal.status %></p>
-      <p><strong style="color: #00c897;">Fecha de Inicio:</strong> <%= @goal.start_date %></p>
-      <p><strong style="color: #00c897;">Fecha de Término:</strong> <%= @goal.finish_date %></p>
+      <p><strong style="color: #00c897;">Fecha de Inicio:</strong> <%= @goal.start_date.strftime("%d-%m-%Y") %></p>
+      <p><strong style="color: #00c897;">Fecha de Término:</strong> <%= @goal.finish_date.strftime("%d-%m-%Y") %></p>
     </div>
 
 
@@ -44,7 +44,7 @@
             <td style="padding: 10px; border: 1px solid #ddd; color: <%= transaction.amount.negative? ? 'red' : 'green' %>;">
               <%= number_to_currency(transaction.amount) %>
             </td>
-            <td style="padding: 10px; border: 1px solid #ddd;"><%= transaction.date %></td>
+            <td style="padding: 10px; border: 1px solid #ddd;"><%= transaction.date.strftime("%d-%m-%Y") %></td>
             <td style="padding: 10px; border: 1px solid #ddd;"><%= transaction.account.bank %></td>
             <td style="padding: 10px; border: 1px solid #ddd; color: <%= transaction.amount.negative? ? 'red' : '#00c897' %>;">
               <%= transaction.amount.negative? ? 'Egreso' : 'Ingreso' %>
