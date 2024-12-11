@@ -35,7 +35,7 @@
           <small class="text-muted d-block mb-1">Saldo Disponible</small>
           <p class="text-success fw-bold fs-4 mb-0">
           <span data-controller="currency-symbol" data-currency="<%= @account.currency %>">
-            <%= @account.balance.total_amount %>
+            <%= number_to_currency(@account.balance.total_amount,unit: "", delimiter: ",") %>
           </span>
           </p>
           </div>
@@ -122,7 +122,7 @@
                       <%= number_to_currency(t.amount, unit: "$") %>
                     </span>
                   </td>
-                  <td><%= t.date %></td>
+                  <td><%= t.date.strftime("%d-%m-%Y") %></td>
                   <td>
                     <span class="badge <%= t.mytransaction_type == 'Ingreso' ? 'bg-success' : 'bg-danger' %> rounded-pill">
                       <%= t.mytransaction_type %>

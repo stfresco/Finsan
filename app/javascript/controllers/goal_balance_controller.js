@@ -14,9 +14,10 @@ export default class extends Controller {
     console.log(this.submitTarget)
     console.log(this.inputTarget.value)
     const inputvalue = parseFloat(this.inputTarget.value) || 0
-    if (inputvalue > this.amountValue) {
+    if (inputvalue > this.amountValue || inputvalue === 0.0 ) {
       this.inputTarget.classList.add("is-invalid")
       this.submitTarget.disabled = true
+      // alert("Tu saldo es insuficiente")
     } else {
       this.inputTarget.classList.remove("is-invalid")
       this.submitTarget.disabled = false
