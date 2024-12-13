@@ -4,7 +4,7 @@
   </h2>
   <h1 class="text-end text-success mb-4">Balance:
     <span id="balance" data-check-balance-target="balance">
-      <%= @account.balance.total_amount %>
+      <%= number_to_currency(@account.balance.total_amount, unit: "", delimiter: ",") %>
     </span>
   </h1>
 
@@ -13,6 +13,8 @@
 
 
       <%= c.input :mytransaction_type,
+                  label: "Tipo de cuenta:",
+                  label_html: { class: "form-label fw-bold" },
                   as: :select,
                   collection: ["Ingreso", "Egreso"],
                   include_blank: "Selecciona una opción",
@@ -22,12 +24,15 @@
                       check_balance_target: "select"
                     },
                     class: "form-select"
-                  }
+                  } ,required: false
       %>
     </div>
 
+
     <div class="mb-3">
       <%= c.input :category,
+                  label: "Categoria:",
+                  label_html: { class: "form-label fw-bold" },
                   as: :select,
                   collection: ["Sueldo", "Bonificaciones", "Ingresos por Alquiler", "Venta de bienes", "Comida",
                                "Entretenimiento", "Inversiones", "Pensiones", "Subsidios", "Pago de alquiler",
@@ -41,7 +46,7 @@
                       category_toggle_target: "select"
                     },
                     class: "form-select"
-                  }
+                  },required: false
       %>
     </div>
 
@@ -59,40 +64,49 @@
 
     <div class="mb-3">
       <%= c.input :amount,
+                  label: "Monto:",
+                  label_html: { class: "form-label fw-bold" },
                   input_html: {
                     data: {
                       check_balance_target: "amount",
                       action: "keyup->check-balance#saldo"
                     },
                     class: "form-control"
-                  }
+                  },required: false
       %>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-3 d-none">
       <%= c.association :goal, class: "form-select" %>
     </div>
 
+
     <div class="mb-3">
       <%= c.input :method,
+                  label: "Metodo de pago: ",
+                  label_html: { class: "form-label fw-bold" },
                   as: :select,
                   collection: ["Efectivo", "Tarjeta de crédito", "Tarjeta de débito", "Transferencia Bancaria",
                                "Billetera electrónica", "Otra"],
                   include_blank: "Selecciona un metodo de pago",
-                  class: "form-select"
+                  class: "form-select",required: false
       %>
     </div>
 
     <div class="mb-3">
-      <%= c.input :description, class: "form-control" %>
+      <%= c.input :description, label:"Descripción: ", label_html: { class: "form-label fw-bold" }
+ %>
     </div>
 
     <div class="mb-3">
-      <%= c.input :date, as: :string,
+      <%= c.input :date,
+                        label: "Fecha: ",
+                        label_html: { class: "form-label fw-bold" },
+                        as: :string,
                         input_html: {
                           data: { controller: "datepicker" },
                           class: "form-control"
-                        }
+                        }, required: false
       %>
     </div>
 
@@ -101,4 +115,3 @@
     </div>
   <% end %>
 </div>
-

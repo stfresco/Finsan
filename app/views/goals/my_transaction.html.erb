@@ -1,105 +1,87 @@
-<div class="container w-26 border shadow mt-5 p-3" data-controller="goal-balance" data-goal-balance-amount-value="<%= @account.balance.total_amount %>">
-  <h2 class="text-center mb-4">
-    <strong> Crea tu transacción!🧑🏼‍💻</strong>
-  </h2>
+<div class="container w-50 border rounded shadow-lg mt-5 p-4" data-controller="goal-balance" data-goal-balance-amount-value="<%= @account.balance.total_amount %>">
+  <div class="card-header bg-gradient-primary text-black text-center py-3">
+          <h2 class="h4 mb-0">
+            <i class="fa-solid fa-bullseye me-2"></i><strong>Registrar transacción para:</strong>
+          </h2>
+  </div>
 
+  <h3 class="text-center text-success mb-4"><strong><%=(Goal.find params[:goal]).title %></strong></h3>
 
-  <h1><%= (Goal.find params[:goal]).title %></h1>
+  <%= simple_form_for [@account, @transaction], url: create_goal_transaction_path do |c| %>
 
-
-  <%= simple_form_for [@account, @transaction] ,url: create_goal_transaction_path do |c| %>
-
-    <div class="mb-3">
-
-
+    <div class="d-none">
       <%= c.input :mytransaction_type,
-                  input_html: {
-                    value: "Egreso",
-                    hidden: true
-                  }, label: false
-      %>
+                  input_html: { value: "Egreso", hidden: true },
+                  label: false %>
     </div>
 
-    <div class="mb-3">
+
+    <div class="d-none">
       <%= c.input :category,
-                  input_html: {
-                    value: "Otra",
-                    hidden: true
-                  }, label: false
-      %>
+                  input_html: { value: "Otra", hidden: true },
+                  label: false %>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-4">
       <%= c.input :amount,
-                  input_html:{
-                    data:{
-                        goal_balance_target: "input",
-                        action: "keyup->goal-balance#disableEgreso"
-                    }
-                  }
-      %>
-    </div>
-
-    <div class="mb-3">
-      <%= c.input :goal,
+                  label: "Monto:",
+                  label_html: { class: "form-label fw-bold" },
                   input_html: {
-                    value: params[:goal],
-                    hidden: true
-                  }, label: false
-       %>
+                    data: {
+                      goal_balance_target: "input",
+                      action: "keyup->goal-balance#disableEgreso"
+                    },
+                    class: "form-control"
+                  },required: false  %>
     </div>
 
-    <%= hidden_field_tag :account, params[:account]%>
-    <div class="mb-3">
+
+
+    <div class="d-none">
+      <%= c.input :goal,
+                  input_html: { value: params[:goal], hidden: true },
+                  label: false %>
+    </div>
+
+    <%= hidden_field_tag :account, params[:account] %>
+
+    <div class="mb-4">
       <%= c.input :method,
+                  label: "Método de pago:",
+                  label_html: { class: "form-label fw-bold" },
                   as: :select,
-                  collection: ["Efectivo", "Tarjeta de crédito", "Tarjeta de débito", "Transferencia Bancaria",
-                               "Billetera electrónica", "Otra"],
-                  include_blank: "Selecciona un metodo de pago",
-                  class: "form-select"
-      %>
+                  collection: ["Efectivo", "Tarjeta de crédito", "Tarjeta de débito", "Transferencia Bancaria", "Billetera electrónica", "Otra"],
+                  include_blank: "Selecciona un método de pago",
+                  input_html: { class: "form-select" },required: false %>
     </div>
 
-    <div class="mb-3">
-      <%= c.input :description, class: "form-control" %>
+
+    <div class="mb-4">
+      <%= c.input :description,
+                  label: "Descripción:",
+                  label_html: { class: "form-label fw-bold" },
+                  input_html: { class: "form-control" } %>
     </div>
 
-    <div class="mb-3">
-      <%= c.input :date, as: :string,
-                        input_html: {
-                          data: { controller: "datepicker" },
-                          class: "form-control"
-                        }
-      %>
+
+    <div class="mb-4">
+      <%= c.input :date,
+                  label: "Fecha:",
+                  label_html: { class: "form-label fw-bold" },
+                  as: :string,
+                  input_html: {
+                    data: { controller: "datepicker" },
+                    class: "form-control"
+                  },required: false %>
     </div>
+
 
     <div class="text-center">
-      <%= c.submit "Crear transacción", data: { goal_balance_target: "submit" }, class: "btn btn-primary fw-bold" %>
+      <%= c.submit "Crear transacción",
+                  data: { goal_balance_target: "submit" },
+                  class: "btn btn-primary fw-bold px-4 py-2" %>
     </div>
   <% end %>
+
+
 </div>
-
-
-
-<%# <script>
-  const selector = document.querySelector("select")
-  const balance = parseFloat(document.getElementById("balance").innerText)
-  const amount = document.querySelector("#my_transaction_amount")
-  selector.addEventListener("change", () => {
-    if (balance === 0.0) {
-      document.querySelector('input[name="commit"]').disabled = true
-      alert("Tu saldo está en cero, no puedes hacer egresos")
-    }
-  })
-  amount.addEventListener("keyup", () => {
-    const submitButton = document.querySelector('input[name="commit"]');
-    if (parseFloat(amount.value) > balance) {
-      amount.style.color = "red"; // Cambiar color del monto
-      submitButton.disabled = true; // Deshabilitar el botón
-      alert("Tu saldo es menor a tus egresos, no puedes hacer egresos");
-    } else {
-      amount.style.color = ""; // Restaurar el color original
-      submitButton.disabled = false; // Habilitar el botón si la condición es válida
-    }
-  });
-</script> %>
