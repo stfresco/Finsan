@@ -26,5 +26,6 @@ Rails.application.routes.draw do
 
   resources :balances, only: [:edit, :update, :show]
   resources :goals
+  resources :questions, only: [:index, :create]
 
 end
